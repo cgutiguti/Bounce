@@ -1,4 +1,4 @@
-# Music-X-Ray
+# Bounce
 ===
 ## Table of Contents
 1. [Overview](#Overview)
@@ -13,7 +13,7 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 ### App Evaluation
 - **Category: Entertainment**
 - **Mobile: Could be used on desktop, but mobile experience and portability are important aspects of this app**
-- **Story:**
+- **Story: Have you ever wondered how Spotify recommends music for you so well? This Music X-Ray app allows you to access everything Spotify uses to evaluate tracks and artists. You can view your own genres and top artists and tracks, see the audio features of individual songs, and see the genre profile of your own spotify playlists. **
 - **Market:Anyone with a Spotify account who wants to access the more in-depth information about their listening habits**
 - **Habit: not very habit forming; however, may be used frequently to create new playlists based on genres**
 - **Scope:**
@@ -26,8 +26,8 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 
 * ability to login via spotify and integrate with Spotify API/SDK
 * ability to create an account and link it to your spotify?
-* ability to take a picture with the camera and make it the playlist cover image or user profile picture
-* search for artists and tracks
+* ability to take a picture with the camera and make it your user profile picture
+* search for artists/tracks
 * view stats for artists
     * name
     * popularity
@@ -127,7 +127,7 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="https://scontent-ort2-1.xx.fbcdn.net/v/wl/t1.15752-9/107094331_1002959833495379_3397724779095505049_n.jpg?_nc_cat=105&_nc_sid=b96e70&_nc_ohc=8ytaKEDZrlsAX_I_ghb&_nc_ht=scontent-ort2-1.xx&_nc_rmd=260&_nc_log=1&oh=26fa9f76177602503558b295bf31442c&oe=5F2C1BF8" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
