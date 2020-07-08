@@ -69,10 +69,10 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 * link spotify account
     * ability to login via spotify and integrate with Spotify API/SDK
 * view personal user information
+    * change profile picture
     * view your top tracks and artists
     * view your playlists and their track information
         * genres
-        * average popularity of your songs
 * search screen
     * search for artists and tracks
     * view stats for artists
@@ -93,6 +93,8 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
         * speechiness
         * valence
         * tempo
+* recommended screen
+     * view genre affinities (complex algorithm requirement)
 
 ### 3. Navigation
 
@@ -100,6 +102,7 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 
 * search tab
 * personal profile tab
+* Browse/Recommended tab
 
 
 **Flow Navigation** (Screen to Screen)
@@ -113,6 +116,7 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
     * -> view individual artist info
     * -> search tab
     * -> view personal playlists
+    * -> edit and add user profile picture
 * search screen
     * -> view individual artist info
     * -> view individual track info
@@ -122,12 +126,12 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
     * -> view individual track info
 * view individual track info
     * -> view individual artist info
-
+* recommended screen
 
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="https://scontent-ort2-1.xx.fbcdn.net/v/wl/t1.15752-9/107094331_1002959833495379_3397724779095505049_n.jpg?_nc_cat=105&_nc_sid=b96e70&_nc_ohc=8ytaKEDZrlsAX_I_ghb&_nc_ht=scontent-ort2-1.xx&_nc_rmd=260&_nc_log=1&oh=26fa9f76177602503558b295bf31442c&oe=5F2C1BF8" width=600>
+
+<img src="https://scontent-ort2-1.xx.fbcdn.net/v/wl/t1.15752-9/107094331_1002959833495379_3397724779095505049_n.jpg?_nc_cat=105&_nc_sid=b96e70&_nc_ohc=8ytaKEDZrlsAX_I_ghb&_nc_ht=scontent-ort2-1.xx&_nc_rmd=260&_nc_log=1&oh=26fa9f76177602503558b295bf31442c&oe=5F2C1BF8" width=1000>
 
 ### [BONUS] Digital Wireframes & Mockups
 
