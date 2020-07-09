@@ -175,6 +175,17 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
    | url           | String   | 		The source URL of the image.|
    | Width         | Integer  | 	The image width in pixels. If unknown: null or not returned.|
    | Type        | String   |The object type: "image" |
+#### Playlist
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | id	   | string	   | The Spotify ID for the playlist. |
+   | images	   | an array of image objects   | 	Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See Working with Playlists.|
+Note: If returned, the source URL for the image ( url ) is temporary and will expire in less than a day.
+   | name	   | string	   | The name of the playlist.|
+   | owner	   | a user object	   | The user who owns the playlist|
+   | public	   | Boolean or null	   | The playlist’s public/private status: true the playlist is public, false the playlist is private, null the playlist status is not relevant. For more about public/private status, see Working with Playlists.|
+   | tracks	   | array of playlist track objects inside a paging object	| Information about the tracks of the playlist.|
+   | type	   | string   | 	The object type: “playlist”|
    
 #### Audio Features
 
@@ -194,6 +205,63 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
    | time_signature	   | int	   | An estimated overall time signature of a track. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure).   | 
    | valence   | 	float   | 	A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).    | 
 ### Networking
+#### Albums
+Base URL: https://api.spotify.com/v1
+
+ | METHOD	 | ENDPOINT	 | USAGE	 | RETURNS |
+ | --------- | --------- | -------|-------- |
+ | GET	 | /v1/albums/{id}	 | Get an Album | 	album | 
+ | GET | 	/v1/albums/{id}/tracks | 	Get an Album's Tracks | 	tracks | 
+ | GET | 	/v1/albums | 	Get Several Albums | 	albums | 
+#### Artists
+Base URL: https://api.spotify.com/v1
+
+ | METHOD	 | ENDPOINT | 	USAGE	 | RETURNS | 
+  | --------- | --------- | -------|-------- |
+ | GET	 | /v1/artists/{id}	 | Get an Artist	 | artist | 
+ | GET	 | /v1/artists/{id}/albums	 | Get an Artist's Albums | 	albums | 
+ | GET	 | /v1/artists/{id}/top-tracks	 | Get an Artist's Top Tracks | 	tracks | 
+ | GET	 | /v1/artists/{id}/related-artists | 	Get an Artist's Related Artists	 | artists | 
+ | GET	 | /v1/artists	Get Several Artists	 | artists | 
+#### User Profile
+Base URL: https://api.spotify.com/v1
+
+ | METHOD	 | ENDPOINT	 | USAGE	 | RETURNS | 
+  | --------- | --------- | -------|-------- |
+ | GET	 | /v1/me	 | Get Current User's Profile	 | user | 
+ | GET	 | /v1/users/{user_id}	 | Get a User's Profile	 | user | 
+#### Tracks
+Base URL: https://api.spotify.com/v1
+
+
+ | GET	 | /v1/audio-analysis/{id}	 | Get Audio Analysis for a Track	 | audio analysis object | 
+ | GET	 | /v1/audio-features/{id}	 | Get Audio Features for a Track	 | audio features | 
+ | GET	 | /v1/audio-features	 | Get Audio Features for Several Tracks	 | audio features | 
+ | GET	 | /v1/tracks	 | Get Several Tracks	 | tracks | 
+ | GET	 | /v1/tracks/{id}	 | Get a Track	 | track | 
+ 
+#### Playlists 
+Base URL: https://api.spotify.com/v1
+
+ | METHOD	 | ENDPOINT	 | USAGE	 | RETURNS | 
+  | --------- | --------- | -------|-------- |
+ | POST	 | /v1/playlists/{playlist_id}/tracks	 | Add Items to a Playlist	 | - | 
+ | PUT	 | /v1/playlists/{playlist_id}	 | Change a Playlist's Details	 | - | 
+ | POST	 | /v1/users/{user_id}/playlists	 | Create a Playlist	 | - | 
+ | GET	 | /v1/me/playlists	 | Get a List of Current User's Playlists	 | playlists | 
+ | GET	 | /v1/users/{user_id}/playlists	 | Get a List of a User's Playlists	 | playlists | 
+ | GET	 | /v1/playlists/{playlist_id}/images	 | Get a Playlist Cover Image	 | list of image objects | 
+ | GET	 | /v1/playlists/{playlist_id}	 | Get a Playlist	 | playlist | 
+ | GET	 | /v1/playlists/{playlist_id}/tracks	 | Get a Playlist's Items	 | tracks | 
+ | DELETE	 | /v1/playlists/{playlist_id}/tracks	 | Remove Items from a Playlist	 | - | 
+ | PUT	 | /v1/playlists/{playlist_id}/tracks	 | Reorder a Playlist's Items	 | - | 
+ | PUT	 | /v1/playlists/{playlist_id}/tracks	 | Replace a Playlist's Items	 | - | 
+ | PUT	 | /v1/playlists/{playlist_id}/images	 | Upload a Custom Playlist Cover Image | 	- | 
+#### Personalization
+Base URL: https://api.spotify.com/v1
+ | METHOD	 | ENDPOINT	 | USAGE	 | RETURNS | 
+  | --------- | --------- | -------|-------- |
+ |GET |	/v1/me/top/{type}	 |Get a User's Top Artists and Tracks	 |artists or tracks |
 #### List of network requests by screen
 ### Networking
 - [Add list of network requests by screen ]
