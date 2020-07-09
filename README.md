@@ -233,7 +233,8 @@ Base URL: https://api.spotify.com/v1
 #### Tracks
 Base URL: https://api.spotify.com/v1
 
-
+ | METHOD	 | ENDPOINT	 | USAGE	 | RETURNS | 
+  | --------- | --------- | -------|-------- |
  | GET	 | /v1/audio-analysis/{id}	 | Get Audio Analysis for a Track	 | audio analysis object | 
  | GET	 | /v1/audio-features/{id}	 | Get Audio Features for a Track	 | audio features | 
  | GET	 | /v1/audio-features	 | Get Audio Features for Several Tracks	 | audio features | 
