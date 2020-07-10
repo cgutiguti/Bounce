@@ -18,7 +18,7 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 - **Habit: not very habit forming; however, may be used frequently to create new playlists based on genres**
 - **Scope:**
 
-##Timeline
+## Timeline
 ### Week 1
  - [ ] Set up spotify SDK and get working Spotify authentication
  - [ ] Set up models
