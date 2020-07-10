@@ -20,9 +20,29 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 
 ##Timeline
 ### Week 1
+## Monday
+## Tuesday
+## Wednesday
+## Thursday
+## Friday
 ### Week 2
+## Monday
+## Tuesday
+## Wednesday
+## Thursday
+## Friday
 ### Week 3
+## Monday
+## Tuesday
+## Wednesday
+## Thursday
+## Friday
 ### Week 4
+## Monday
+## Tuesday
+## Wednesday
+## Thursday
+## Friday
 
 
 ## Product Spec
