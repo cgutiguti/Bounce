@@ -20,23 +20,23 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 
 ##Timeline
 ### Week 1
--[ ] Set up spotify SDK and get working Spotify authentication
--[ ] Set up models
--[ ] Set up skeleton navigational views
--[ ] Set up account creation and linking with Spotify. 
+ - [ ] Set up spotify SDK and get working Spotify authentication
+ - [ ] Set up models
+ - [ ] Set up skeleton navigational views
+ - [ ] Set up account creation and linking with Spotify. 
 ### Week 2
--[ ] Present search functionality 
--[ ] artist details screen
--[ ] track audio features screen
+ - [ ] Present search functionality 
+ - [ ] artist details screen
+ - [ ] track audio features screen
 ### Week 3
--[ ] personal profile screen
--[ ] Your affinities for genres (complex algorithm): on Affinities tab, view how much affinity you have for each genre
--[ ] change profile image from profile tab
--[ ] implement logout button
+ - [ ] personal profile screen
+ - [ ] Your affinities for genres (complex algorithm): on Affinities tab, view how much affinity you have for each genre
+ - [ ] change profile image from profile tab
+ - [ ] implement logout button
 ### Week 4
--[ ] animations
--[ ] image assets and design
--[ ] Auto Layout
+ - [ ] animations
+ - [ ] image assets and design
+ - [ ] Auto Layout
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
