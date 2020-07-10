@@ -18,6 +18,13 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 - **Habit: not very habit forming; however, may be used frequently to create new playlists based on genres**
 - **Scope:**
 
+##Timeline
+### Week 1
+### Week 2
+### Week 3
+### Week 4
+
+
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
