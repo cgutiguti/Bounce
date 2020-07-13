@@ -25,7 +25,8 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
  - [ ] Set up skeleton navigational views
  - [ ] Set up account creation and linking with Spotify. 
 ### Week 2
- - [ ] Present search functionality 
+ - [ ] Search bar
+ - [ ] Present search results functionality 
  - [ ] artist details screen
  - [ ] track audio features screen
 ### Week 3
