@@ -1,0 +1,6 @@
+framework module Pods_Bounce {
+  umbrella header "Pods-Bounce-umbrella.h"
+
+  export *
+  module * { export * }
+}

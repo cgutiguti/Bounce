@@ -63,9 +63,9 @@ static NSString * const SpotifyRedirectURLString = @"spotify-login-sdk-test-app:
     [self presentAlertControllerWithTitle:@"Authorization Succeeded"
                                   message:session.description
                               buttonTitle:@"Nice"];
-//    [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+    });
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didFailWithError:(NSError *)error
