@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "SceneDelegate.h"
+#import "Parse/Parse.h"
 
 @interface AppDelegate ()
 
@@ -25,6 +26,14 @@
      self.rootViewController = [ViewController new];
      self.window.rootViewController = self.rootViewController;
      [self.window makeKeyAndVisible];
+    
+    ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        
+        configuration.applicationId = @"codepathInstagram";
+        configuration.server = @"http://codepathfbinstagram.herokuapp.com/parse";
+    }];
+    
+    [Parse initializeWithConfiguration:config];
      return YES;
 }
 - (BOOL)application:(UIApplication *)application

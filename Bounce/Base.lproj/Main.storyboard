@@ -120,7 +120,7 @@
             </objects>
             <point key="canvasLocation" x="1500.0000000000002" y="1603.7946428571429"/>
         </scene>
-        <!--Track Details View Controller-->
+        <!--Track Details-->
         <scene sceneID="4Gs-xv-io2">
             <objects>
                 <viewController id="jVK-mL-aVb" customClass="TrackDetailsViewController" sceneMemberID="viewController">
@@ -367,7 +367,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kvz-SG-Ucb"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pTh-54-Avo"/>
+                    <navigationItem key="navigationItem" title="Track Details" id="pTh-54-Avo"/>
                     <connections>
                         <outlet property="acousticnessLabel" destination="b35-Dr-s5d" id="rBB-gt-a18"/>
                         <outlet property="albumView" destination="kbv-Wh-OZh" id="Snn-sr-QZ4"/>
