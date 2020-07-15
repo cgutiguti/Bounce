@@ -74,6 +74,7 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
     [self presentAlertControllerWithTitle:@"Authorization Failed"
                                   message:error.description
                               buttonTitle:@"Bummer"];
+    NSLog(error.description);
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didRenewSession:(SPTSession *)session

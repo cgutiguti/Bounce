@@ -29,7 +29,7 @@
         <!--View Controller-->
         <scene sceneID="NwH-2R-yi1">
             <objects>
-                <viewController id="oqp-d2-aUR" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="oqp-d2-aUR" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A6k-3P-RRj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +45,7 @@
         <!--Search View Controller-->
         <scene sceneID="yd9-aS-sng">
             <objects>
-                <viewController id="efW-Di-GsG" customClass="SearchViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="efW-Di-GsG" customClass="SearchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ujl-tB-4b2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,9 +69,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfF-lc-sHs">
-                                                    <rect key="frame" x="96" y="11" width="42" height="21"/>
+                                                    <rect key="frame" x="96" y="11" width="46" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -80,9 +80,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRo-Sv-mJ4">
-                                                    <rect key="frame" x="96" y="46" width="42" height="21"/>
+                                                    <rect key="frame" x="96" y="46" width="46" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -120,37 +120,311 @@
             </objects>
             <point key="canvasLocation" x="1500.0000000000002" y="1603.7946428571429"/>
         </scene>
-        <!--View Controller-->
+        <!--Track Details View Controller-->
         <scene sceneID="4Gs-xv-io2">
             <objects>
-                <viewController id="jVK-mL-aVb" sceneMemberID="viewController">
+                <viewController id="jVK-mL-aVb" customClass="TrackDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vaF-yf-qHJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lic-hN-UWo">
+                                <rect key="frame" x="140" y="81" width="254" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="kba-k4-cXx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdm-90-3OF">
+                                <rect key="frame" x="140" y="131" width="254" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KfV-V1-6T4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kbv-Wh-OZh">
+                                <rect key="frame" x="20" y="76" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="6fu-Y2-APn"/>
+                                    <constraint firstAttribute="height" constant="100" id="XY1-WT-L21"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="key" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shc-KZ-CS1">
+                                <rect key="frame" x="348.5" y="211" width="35.5" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="BBQ-Uk-PmD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time signature" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9h4-Cg-zml">
+                                <rect key="frame" x="238" y="269" width="146" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Xyl-UI-9Lb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loudness" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYh-ie-Cvq">
+                                <rect key="frame" x="295.5" y="385" width="88.5" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="NsZ-Jc-VeG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="valence" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Suy-J0-y11">
+                                <rect key="frame" x="308" y="443" width="76" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="q0G-js-rsv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="acousticness" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zeh-C5-4b4">
+                                <rect key="frame" x="257" y="501" width="127" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="sfl-KV-S1k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tempo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1g-nE-Vtd">
+                                <rect key="frame" x="320" y="327" width="64" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="G9Z-57-0Ef"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="danceability" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLo-gu-gqp">
+                                <rect key="frame" x="263.5" y="559" width="120.5" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="NJq-mB-RRg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="energy" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRl-au-tqc">
+                                <rect key="frame" x="314.5" y="617" width="69.5" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="RvW-Qv-d1k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C Sharp Minor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xho-Rk-IMC">
+                                <rect key="frame" x="20" y="207.5" width="221" height="35"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsR-qx-Cq7">
+                                <rect key="frame" x="20" y="265.5" width="60" height="35"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="168 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEa-an-Hfk">
+                                <rect key="frame" x="20" y="323.5" width="70" height="35"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-2.3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiB-cV-BRm">
+                                <rect key="frame" x="20" y="381.5" width="64" height="35"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="72" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpu-1Q-9hN">
+                                <rect key="frame" x="20" y="439.5" width="40" height="35"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="64" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b35-Dr-s5d">
+                                <rect key="frame" x="20" y="497.5" width="40" height="35"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="39" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9V-85-Gfu">
+                                <rect key="frame" x="20" y="555.5" width="40" height="35"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="51" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKu-H0-jpb">
+                                <rect key="frame" x="20" y="613.5" width="40" height="35"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="out of 100" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWX-Ig-H0Q">
+                                <rect key="frame" x="70" y="439.5" width="50" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="5Ma-iU-Kyf"/>
+                                    <constraint firstAttribute="width" constant="50" id="wlH-4R-HId"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="out of 100" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwe-Ln-qAa">
+                                <rect key="frame" x="70" y="497.5" width="50" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="WUA-Kc-YqE"/>
+                                    <constraint firstAttribute="width" constant="50" id="jV1-GG-X4b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="out of 100" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8Y-Xg-Wjs">
+                                <rect key="frame" x="70" y="555.5" width="50" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="J3p-zg-2zr"/>
+                                    <constraint firstAttribute="width" constant="50" id="xwg-qJ-2SX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="out of 100" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pm5-YV-s4F">
+                                <rect key="frame" x="70" y="613.5" width="50" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Hlz-wr-2dh"/>
+                                    <constraint firstAttribute="width" constant="50" id="Vwy-1A-rVH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Q9V-85-Gfu" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="2B7-Pp-J3d"/>
+                            <constraint firstItem="9h4-Cg-zml" firstAttribute="centerY" secondItem="SsR-qx-Cq7" secondAttribute="centerY" id="2cB-Pl-b1m"/>
+                            <constraint firstItem="MEa-an-Hfk" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="311-o1-Ttq"/>
+                            <constraint firstItem="bpu-1Q-9hN" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="43r-9t-N4j"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="Shc-KZ-CS1" secondAttribute="trailing" constant="30" id="4iA-Bb-RRh"/>
+                            <constraint firstItem="kbv-Wh-OZh" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="8du-fZ-iv9"/>
+                            <constraint firstItem="nwe-Ln-qAa" firstAttribute="leading" secondItem="b35-Dr-s5d" secondAttribute="trailing" constant="10" id="Bts-ok-sS0"/>
+                            <constraint firstItem="b35-Dr-s5d" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="Cur-0w-33B"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="Zeh-C5-4b4" secondAttribute="trailing" constant="30" id="D4K-f8-mxW"/>
+                            <constraint firstItem="Pm5-YV-s4F" firstAttribute="leading" secondItem="lKu-H0-jpb" secondAttribute="trailing" constant="10" id="Drf-Lg-cuO"/>
+                            <constraint firstItem="kbv-Wh-OZh" firstAttribute="top" secondItem="Kvz-SG-Ucb" secondAttribute="top" constant="20" id="ENc-J7-02u"/>
+                            <constraint firstItem="Zeh-C5-4b4" firstAttribute="centerY" secondItem="b35-Dr-s5d" secondAttribute="centerY" id="FsS-9k-NcK"/>
+                            <constraint firstItem="Xho-Rk-IMC" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="Fvt-jW-dX9"/>
+                            <constraint firstItem="SsR-qx-Cq7" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="G4Y-8j-EFQ"/>
+                            <constraint firstItem="qLo-gu-gqp" firstAttribute="centerY" secondItem="r8Y-Xg-Wjs" secondAttribute="centerY" id="Gjx-Xd-hR2"/>
+                            <constraint firstItem="aYh-ie-Cvq" firstAttribute="top" secondItem="h1g-nE-Vtd" secondAttribute="bottom" constant="30" id="Hcx-bD-ZCb"/>
+                            <constraint firstItem="9h4-Cg-zml" firstAttribute="top" secondItem="Shc-KZ-CS1" secondAttribute="bottom" constant="30" id="Ho2-VX-iwh"/>
+                            <constraint firstItem="tRl-au-tqc" firstAttribute="centerY" secondItem="Pm5-YV-s4F" secondAttribute="centerY" id="IEi-nb-r27"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="h1g-nE-Vtd" secondAttribute="trailing" constant="30" id="Izv-l1-1J1"/>
+                            <constraint firstItem="GiB-cV-BRm" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="J4N-hp-78U"/>
+                            <constraint firstItem="Lic-hN-UWo" firstAttribute="top" secondItem="Kvz-SG-Ucb" secondAttribute="top" constant="25" id="J6o-Xb-I3f"/>
+                            <constraint firstItem="Zeh-C5-4b4" firstAttribute="top" secondItem="Suy-J0-y11" secondAttribute="bottom" constant="30" id="L03-EB-dVj"/>
+                            <constraint firstItem="Q9V-85-Gfu" firstAttribute="centerY" secondItem="r8Y-Xg-Wjs" secondAttribute="centerY" id="Mrw-0b-rkH"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="Suy-J0-y11" secondAttribute="trailing" constant="30" id="NTR-6J-fp6"/>
+                            <constraint firstItem="tWX-Ig-H0Q" firstAttribute="leading" secondItem="bpu-1Q-9hN" secondAttribute="trailing" constant="10" id="ODM-I2-PRG"/>
+                            <constraint firstItem="h1g-nE-Vtd" firstAttribute="top" secondItem="9h4-Cg-zml" secondAttribute="bottom" constant="30" id="RCO-DP-IVh"/>
+                            <constraint firstItem="bdm-90-3OF" firstAttribute="leading" secondItem="Lic-hN-UWo" secondAttribute="leading" id="ULW-0O-miY"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="tRl-au-tqc" secondAttribute="trailing" constant="30" id="VaA-YM-tUQ"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="qLo-gu-gqp" secondAttribute="trailing" constant="30" id="WHI-49-HKH"/>
+                            <constraint firstItem="Suy-J0-y11" firstAttribute="top" secondItem="aYh-ie-Cvq" secondAttribute="bottom" constant="30" id="WKE-FM-OFg"/>
+                            <constraint firstItem="tRl-au-tqc" firstAttribute="top" secondItem="qLo-gu-gqp" secondAttribute="bottom" constant="30" id="aSz-jT-puS"/>
+                            <constraint firstItem="bdm-90-3OF" firstAttribute="trailing" secondItem="Lic-hN-UWo" secondAttribute="trailing" id="c0Z-b4-f9b"/>
+                            <constraint firstItem="r8Y-Xg-Wjs" firstAttribute="leading" secondItem="Q9V-85-Gfu" secondAttribute="trailing" constant="10" id="cxo-0C-0j1"/>
+                            <constraint firstItem="nwe-Ln-qAa" firstAttribute="centerY" secondItem="b35-Dr-s5d" secondAttribute="centerY" id="dxw-79-rQc"/>
+                            <constraint firstItem="bdm-90-3OF" firstAttribute="top" secondItem="Lic-hN-UWo" secondAttribute="bottom" constant="20" id="eNi-Pq-1rq"/>
+                            <constraint firstItem="Suy-J0-y11" firstAttribute="centerY" secondItem="bpu-1Q-9hN" secondAttribute="centerY" id="ei0-yE-JKg"/>
+                            <constraint firstItem="Lic-hN-UWo" firstAttribute="leading" secondItem="kbv-Wh-OZh" secondAttribute="trailing" constant="20" id="gL6-S1-p4a"/>
+                            <constraint firstItem="tWX-Ig-H0Q" firstAttribute="centerY" secondItem="bpu-1Q-9hN" secondAttribute="centerY" id="nFp-d1-opp"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="Lic-hN-UWo" secondAttribute="trailing" constant="20" id="nSJ-f4-rYA"/>
+                            <constraint firstItem="qLo-gu-gqp" firstAttribute="top" secondItem="Zeh-C5-4b4" secondAttribute="bottom" constant="30" id="nw3-sl-dQ8"/>
+                            <constraint firstItem="lKu-H0-jpb" firstAttribute="centerY" secondItem="Pm5-YV-s4F" secondAttribute="centerY" id="pcu-Xj-UC4"/>
+                            <constraint firstItem="h1g-nE-Vtd" firstAttribute="centerY" secondItem="MEa-an-Hfk" secondAttribute="centerY" id="plv-F8-x1M"/>
+                            <constraint firstItem="Shc-KZ-CS1" firstAttribute="centerY" secondItem="Xho-Rk-IMC" secondAttribute="centerY" id="q2s-Ev-b7n"/>
+                            <constraint firstItem="Shc-KZ-CS1" firstAttribute="top" secondItem="bdm-90-3OF" secondAttribute="bottom" constant="50" id="qwK-Ub-Knz"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="9h4-Cg-zml" secondAttribute="trailing" constant="30" id="tg6-cD-p31"/>
+                            <constraint firstItem="Kvz-SG-Ucb" firstAttribute="trailing" secondItem="aYh-ie-Cvq" secondAttribute="trailing" constant="30" id="vh8-zX-VWw"/>
+                            <constraint firstItem="aYh-ie-Cvq" firstAttribute="centerY" secondItem="GiB-cV-BRm" secondAttribute="centerY" id="vmL-nj-odR"/>
+                            <constraint firstItem="lKu-H0-jpb" firstAttribute="leading" secondItem="Kvz-SG-Ucb" secondAttribute="leading" constant="20" id="xkF-Hh-q9Z"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Kvz-SG-Ucb"/>
                     </view>
                     <navigationItem key="navigationItem" id="pTh-54-Avo"/>
+                    <connections>
+                        <outlet property="acousticnessLabel" destination="b35-Dr-s5d" id="rBB-gt-a18"/>
+                        <outlet property="albumView" destination="kbv-Wh-OZh" id="Snn-sr-QZ4"/>
+                        <outlet property="artistNameLabel" destination="bdm-90-3OF" id="OcP-dQ-9xQ"/>
+                        <outlet property="danceLabel" destination="Q9V-85-Gfu" id="0cD-rN-t0r"/>
+                        <outlet property="energyLabel" destination="lKu-H0-jpb" id="9iT-AT-lNQ"/>
+                        <outlet property="keyLabel" destination="Xho-Rk-IMC" id="HZE-Wi-sUB"/>
+                        <outlet property="loudnessLabel" destination="GiB-cV-BRm" id="3ZD-06-WKH"/>
+                        <outlet property="songNameLabel" destination="Lic-hN-UWo" id="I2c-u1-nJs"/>
+                        <outlet property="tempoLabel" destination="MEa-an-Hfk" id="dXk-vC-35s"/>
+                        <outlet property="timeSigLabel" destination="SsR-qx-Cq7" id="AZY-fF-iUX"/>
+                        <outlet property="valenceLabel" destination="bpu-1Q-9hN" id="zal-tA-fAK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D0Z-1r-icg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1500" y="2352"/>
+            <point key="canvasLocation" x="1500.0000000000002" y="2351.7857142857142"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="ZNS-EI-mbh">
             <objects>
-                <viewController id="GQz-rq-RBL" customClass="ProfileViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="GQz-rq-RBL" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6b3-uy-W35">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vhs-7Q-MpM">
+                                <rect key="frame" x="20" y="76" width="130" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome back," textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2PY-Nx-CCH">
+                                <rect key="frame" x="162" y="76" width="232" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="26"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Carmen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yn-k1-JUM">
+                                <rect key="frame" x="162" y="116" width="232" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="37"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1k7-hq-J3B"/>
                     </view>
                     <navigationItem key="navigationItem" id="Okj-PZ-Qtb"/>
+                    <connections>
+                        <outlet property="profileView" destination="vhs-7Q-MpM" id="XBQ-hz-qNW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mEb-Os-MmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2470" y="1604"/>
+            <point key="canvasLocation" x="2469.5652173913045" y="1603.7946428571429"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="t7y-73-oeg">
@@ -175,7 +449,7 @@
         <!--Genres-->
         <scene sceneID="gj3-oa-15f">
             <objects>
-                <navigationController storyboardIdentifier="loginSegue" automaticallyAdjustsScrollViewInsets="NO" id="nYQ-cN-Bsr" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginSegue" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="nYQ-cN-Bsr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Genres" image="music.note.list" catalog="system" id="8ej-SS-Man"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W2O-do-mF9">
@@ -194,7 +468,7 @@
         <!--Search-->
         <scene sceneID="i3B-ZO-yMZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q5Y-VE-Fha" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="q5Y-VE-Fha" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="fIu-Do-ciZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dPK-KX-CUv">
@@ -213,7 +487,7 @@
         <!--Profile-->
         <scene sceneID="e6a-l0-qCb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dvu-o2-yBq" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="dvu-o2-yBq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="pLe-cC-avY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2ib-yn-hCt">

@@ -7,6 +7,9 @@
 //
 
 #import "SceneDelegate.h"
+#import "ViewController.h"
+
+
 
 @interface SceneDelegate ()
 
@@ -14,12 +17,32 @@
 
 @implementation SceneDelegate
 
-
+- (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
+//    [self.rootViewController.sessionManager application:application openURL:URL options:options];
+//    NSLog(@"%@ %@", URL, options);
+////    return YES;
+//    NSURL *url = [[URLContexts allObjects] firstObject].URL;
+//    [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+    UIOpenURLContext *ctx = [URLContexts allObjects][0];
+    ViewController *rootVC = (ViewController *) [UIApplication sharedApplication].keyWindow.rootViewController;
+    [rootVC.sessionManager application:[UIApplication sharedApplication] openURL:ctx.URL options:ctx.options];
+    
+}
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+//    NSSet *c = connectionOptions.URLContexts;
+//    if(c && [c count] > 0)
+//    {
+//        NSURL *url = ((UIOpenURLContext*)[[c allObjects] firstObject]).URL;
+//        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+//    }
+    self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
+    self.window.rootViewController = [[ViewController alloc] init];
+    [self.window makeKeyAndVisible];
 }
+
 
 
 - (void)sceneDidDisconnect:(UIScene *)scene {

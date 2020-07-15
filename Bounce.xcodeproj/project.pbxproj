@@ -23,6 +23,7 @@
 		9BCFDAA524BD018B009565C4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFDAA424BD018B009565C4 /* SearchViewController.m */; };
 		9BCFDAA824BD01AD009565C4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFDAA724BD01AD009565C4 /* ProfileViewController.m */; };
 		9BCFDAAB24BD156D009565C4 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFDAAA24BD156D009565C4 /* TrackCell.m */; };
+		9BE3CC5C24BF715600ED849A /* TrackDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */; };
 		EB9F1C8AFE85FAE42309706E /* Pods_Bounce_BounceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */; };
 		FED40600C9347714EEA198C0 /* Pods_BounceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355A7877EB07D8403483D118 /* Pods_BounceTests.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,8 @@
 		9BCFDAA724BD01AD009565C4 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		9BCFDAA924BD156D009565C4 /* TrackCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackCell.h; sourceTree = "<group>"; };
 		9BCFDAAA24BD156D009565C4 /* TrackCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
+		9BE3CC5A24BF715600ED849A /* TrackDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackDetailsViewController.h; sourceTree = "<group>"; };
+		9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackDetailsViewController.m; sourceTree = "<group>"; };
 		A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bounce_BounceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D93EBBBAED37A29BE63E14 /* Pods-Bounce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bounce.debug.xcconfig"; path = "Target Support Files/Pods-Bounce/Pods-Bounce.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -215,6 +218,8 @@
 				9BCFDAA424BD018B009565C4 /* SearchViewController.m */,
 				9BCFDAA624BD01AD009565C4 /* ProfileViewController.h */,
 				9BCFDAA724BD01AD009565C4 /* ProfileViewController.m */,
+				9BE3CC5A24BF715600ED849A /* TrackDetailsViewController.h */,
+				9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BCFDA9E24BCEA36009565C4 /* ConnectButton.m in Sources */,
+				9BE3CC5C24BF715600ED849A /* TrackDetailsViewController.m in Sources */,
 				9BCFDA5C24BCCE2E009565C4 /* ViewController.m in Sources */,
 				9BCFDAAB24BD156D009565C4 /* TrackCell.m in Sources */,
 				9BCFDAA824BD01AD009565C4 /* ProfileViewController.m in Sources */,
