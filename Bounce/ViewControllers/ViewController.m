@@ -1,8 +1,8 @@
 #import "ConnectView.h"
 #import "ViewController.h"
 
-static NSString * const SpotifyClientID = @"044b2c45e77f45aca8da89e338849b6a";
-static NSString * const SpotifyRedirectURLString = @"spotify-login-sdk-test-app://spotify-login-callback";
+static NSString * const SpotifyClientID = @"78a164a9d67e4cd4857e69bd9b70b2bb";
+static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
 
 @interface ViewController ()
 @end
@@ -13,23 +13,24 @@ static NSString * const SpotifyRedirectURLString = @"spotify-login-sdk-test-app:
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     /*
      This configuration object holds your client ID and redirect URL.
      */
+    self.sessionManager.delegate = self;
     SPTConfiguration *configuration = [SPTConfiguration configurationWithClientID:SpotifyClientID
                                                                       redirectURL:[NSURL URLWithString:SpotifyRedirectURLString]];
 
     // Set these url's to your backend which contains the secret to exchange for an access token
     // You can use the provided ruby script spotify_token_swap.rb for testing purposes
-//    configuration.tokenSwapURL = [NSURL URLWithString: @"http://localhost:1234/swap"];
-//    configuration.tokenRefreshURL = [NSURL URLWithString: @"http://localhost:1234/refresh"];
+    configuration.tokenSwapURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/swap"];
+    configuration.tokenRefreshURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/refresh"];
 
     /*
      The session manager lets you authorize, get access tokens, and so on.
      */
     self.sessionManager = [SPTSessionManager sessionManagerWithConfiguration:configuration
                                                                     delegate:self];
-    [super viewDidLoad];
 }
 
 #pragma mark - Actions
