@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *signupButton;
+@property (weak, nonatomic) IBOutlet UIButton *skipButton;
 
 @end
 
@@ -28,9 +29,12 @@
     self.loginButton.backgroundColor = color;
 //    self.loginButton.contentEdgeInsets = UIEdgeInsetsMake(11.75, 32.0, 11.75, 32.0);
     self.loginButton.layer.cornerRadius = 20.0;
+    
     self.signupButton.backgroundColor = color;
 //    self.signupButton.contentEdgeInsets = UIEdgeInsetsMake(11.75, 32.0, 11.75, 32.0);
     self.signupButton.layer.cornerRadius = 20.0;
+    self.skipButton.backgroundColor = color;
+    self.skipButton.layer.cornerRadius = 20.0;
 }
 - (IBAction)didTapLogin:(id)sender {
     NSString *username = self.usernameField.text;
@@ -82,6 +86,9 @@
               // manually segue to logged in view
           }
       }];
+}
+- (IBAction)didTapSkip:(id)sender {
+    [self performSegueWithIdentifier:@"loginSegue" sender:nil];
 }
 
 /*
