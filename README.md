@@ -20,20 +20,20 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 
 ## Timeline
 ### Week 1
- - [ ] Set up spotify SDK and get working Spotify authentication
+ - [x] Set up spotify SDK and get working Spotify authentication
  - [ ] Set up models and API endpoints GET functions
   * - [ ] track
   * - [ ] artist
   * - [ ] user
   * - [ ] playlist
   * - [ ] album
- - [ ] Set up skeleton navigational views
- - [ ] Set up account creation and linking with Spotify. 
+ - [x] Set up skeleton navigational views
+ - [x] Set up account creation and linking with Spotify. 
 ### Week 2
  - [ ] Search bar
- * - [ ] clicking on search bar brings up keyboard
+ * - [x] clicking on search bar brings up keyboard
  * - [ ] detection of typed changes refreshes search results
- * - [ ] dismiss keyboard
+ * - [x] dismiss keyboard
  - [ ] Present search results functionality 
  * - [ ] click on artists/tracks to go to details screens
  * - [ ] scrolling
