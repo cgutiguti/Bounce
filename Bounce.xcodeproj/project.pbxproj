@@ -24,6 +24,7 @@
 		9BCFDAA824BD01AD009565C4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFDAA724BD01AD009565C4 /* ProfileViewController.m */; };
 		9BCFDAAB24BD156D009565C4 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFDAAA24BD156D009565C4 /* TrackCell.m */; };
 		9BE3CC5C24BF715600ED849A /* TrackDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */; };
+		9BE3CC5F24BFB8DC00ED849A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC5E24BFB8DC00ED849A /* LoginViewController.m */; };
 		EB9F1C8AFE85FAE42309706E /* Pods_Bounce_BounceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */; };
 		FED40600C9347714EEA198C0 /* Pods_BounceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355A7877EB07D8403483D118 /* Pods_BounceTests.framework */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,8 @@
 		9BCFDAAA24BD156D009565C4 /* TrackCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
 		9BE3CC5A24BF715600ED849A /* TrackDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackDetailsViewController.h; sourceTree = "<group>"; };
 		9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackDetailsViewController.m; sourceTree = "<group>"; };
+		9BE3CC5D24BFB8DC00ED849A /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		9BE3CC5E24BFB8DC00ED849A /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bounce_BounceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D93EBBBAED37A29BE63E14 /* Pods-Bounce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bounce.debug.xcconfig"; path = "Target Support Files/Pods-Bounce/Pods-Bounce.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -220,6 +223,8 @@
 				9BCFDAA724BD01AD009565C4 /* ProfileViewController.m */,
 				9BE3CC5A24BF715600ED849A /* TrackDetailsViewController.h */,
 				9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */,
+				9BE3CC5D24BFB8DC00ED849A /* LoginViewController.h */,
+				9BE3CC5E24BFB8DC00ED849A /* LoginViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				9BCFDA6724BCCE2F009565C4 /* main.m in Sources */,
 				9BCFDA9B24BCE9DC009565C4 /* ConnectView.m in Sources */,
 				9BCFDA5924BCCE2E009565C4 /* SceneDelegate.m in Sources */,
+				9BE3CC5F24BFB8DC00ED849A /* LoginViewController.m in Sources */,
 				9BCFDAA524BD018B009565C4 /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

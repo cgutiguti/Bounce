@@ -1,5 +1,6 @@
 #import "ConnectView.h"
 #import "ViewController.h"
+#import "LoginViewController.h"
 
 static NSString * const SpotifyClientID = @"78a164a9d67e4cd4857e69bd9b70b2bb";
 static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
@@ -23,8 +24,8 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
 
     // Set these url's to your backend which contains the secret to exchange for an access token
     // You can use the provided ruby script spotify_token_swap.rb for testing purposes
-    configuration.tokenSwapURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/swap"];
-    configuration.tokenRefreshURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/refresh"];
+    configuration.tokenSwapURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/api/token"];
+    configuration.tokenRefreshURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/api/refresh_token"];
 
     /*
      The session manager lets you authorize, get access tokens, and so on.
@@ -61,12 +62,20 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
 
 - (void)sessionManager:(SPTSessionManager *)manager didInitiateSession:(SPTSession *)session
 {
-    [self presentAlertControllerWithTitle:@"Authorization Succeeded"
-                                  message:session.description
-                              buttonTitle:@"Nice"];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-    });
+//    [self presentAlertControllerWithTitle:@"Authorization Succeeded"
+//                                  message:session.description
+//                              buttonTitle:@"Nice"];
+//    dispatch_async(dispatch_get_main_queue(), ^{ //this function calls the inner code block using the main thread instead of the background thread.
+//        LoginViewController *loginVC = [[LoginViewController alloc] init];
+////        [self presentViewController:loginVC animated:YES completion:nil];
+//        [self presentModalViewController:loginVC animated:YES];
+////        [self performSegueWithIdentifier:@"connectSegue" sender:nil];
+//    });
+    if (session) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+             [self performSegueWithIdentifier:@"connectToLoginSegue" sender:self];
+        });
+    }
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didFailWithError:(NSError *)error

@@ -12,7 +12,7 @@
 
 
 @interface SceneDelegate ()
-
+@property ViewController *spotifyVC;
 @end
 
 @implementation SceneDelegate
@@ -24,9 +24,10 @@
 //    NSURL *url = [[URLContexts allObjects] firstObject].URL;
 //    [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
     UIOpenURLContext *ctx = [URLContexts allObjects][0];
-    ViewController *rootVC = (ViewController *) [UIApplication sharedApplication].keyWindow.rootViewController;
-    [rootVC.sessionManager application:[UIApplication sharedApplication] openURL:ctx.URL options:ctx.options];
     
+ //   ViewController *rootVC = (ViewController *) [UIApplication sharedApplication].keyWindow.rootViewController;
+ //   [rootVC.sessionManager application:[UIApplication sharedApplication] openURL:ctx.URL options:ctx.options];
+    [self.spotifyVC.sessionManager application:[UIApplication sharedApplication] openURL:ctx.URL options:ctx.options];
 }
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -39,8 +40,13 @@
 //        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
 //    }
     self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
-    self.window.rootViewController = [[ViewController alloc] init];
+ //   self.window.rootViewController = [[ViewController alloc] init];
     [self.window makeKeyAndVisible];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ViewController *spotifyVC = [storyboard instantiateViewControllerWithIdentifier:@"spotifyVC"];
+    self.window.rootViewController = spotifyVC;
+    self.spotifyVC = spotifyVC;
+    
 }
 
 

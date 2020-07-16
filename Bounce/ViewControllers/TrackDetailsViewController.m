@@ -64,43 +64,43 @@
 
 - (void) keyClicked{
     [self presentAlertControllerWithTitle:@"Musical Key"
-                                  message:@""
+                                  message:@"The key the track is in. Integers map to pitches using standard Pitch Class notation. E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on."
                               buttonTitle:@"Close"];
     
 }
 - (void) timeSigClicked {
     [self presentAlertControllerWithTitle:@"Time Signature"
-                                  message:@""
+                                  message:@"An estimated overall time signature of a track. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure)."
                               buttonTitle:@"Close"];
 }
 - (void) tempoClicked {
     [self presentAlertControllerWithTitle:@"Tempo"
-                                  message:@""
+                                  message:@"The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration."
                               buttonTitle:@"Close"];
 }
 - (void) loudnessClicked {
     [self presentAlertControllerWithTitle:@"Loudness"
-                                  message:@""
+                                  message:@"The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typical range between -60 and 0 db."
                               buttonTitle:@"Close"];
 }
 - (void) valenceClicked{
     [self presentAlertControllerWithTitle:@"Valence"
-                                  message:@""
+                                  message:@"A measure from 0 to 100 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry)."
                               buttonTitle:@"Close"];
 }
 - (void) acousticClicked{
     [self presentAlertControllerWithTitle:@"Acousticness"
-                                  message:@""
+                                  message:@"A confidence measure from 0 to 100 of whether the track is acoustic. 100 represents high confidence the track is acoustic."
                               buttonTitle:@"Close"];
 }
 - (void) danceClicked{
     [self presentAlertControllerWithTitle:@"Danceability"
-                                  message:@""
+                                  message:@"Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 00 is least danceable and 100 is most danceable."
                               buttonTitle:@"Close"];
 }
 - (void) energyClicked{
     [self presentAlertControllerWithTitle:@"Energy"
-                                  message:@""
+                                  message:@"Energy is a measure from 0 to 100 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy."
                               buttonTitle:@"Close"];
 }
 - (void)presentAlertControllerWithTitle:(NSString *)title

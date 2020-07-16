@@ -9,9 +9,11 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "SceneDelegate.h"
-#import "Parse/Parse.h"
+#import <Parse/Parse.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate>
+
+@property (nonatomic, strong) SPTAppRemote *appRemote;
 
 @property(nonatomic, strong) ViewController *rootViewController;
 
@@ -29,8 +31,8 @@
     
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         
-        configuration.applicationId = @"codepathInstagram";
-        configuration.server = @"http://codepathfbinstagram.herokuapp.com/parse";
+        configuration.applicationId = @"bounce-parse";
+        configuration.server = @"http://bounce_parse.herokuapp.com/parse";
     }];
     
     [Parse initializeWithConfiguration:config];
@@ -43,6 +45,31 @@
     [self.rootViewController.sessionManager application:application openURL:URL options:options];
     NSLog(@"%@ %@", URL, options);
     return YES;
+}
+- (void)sessionManager:(nonnull SPTSessionManager *)manager didFailWithError:(nonnull NSError *)error {
+    
+}
+
+- (void)sessionManager:(nonnull SPTSessionManager *)manager didInitiateSession:(nonnull SPTSession *)session {
+    if (session) {
+        NSLog(@"%@" , session.description);
+    }
+}
+
+- (void)appRemote:(nonnull SPTAppRemote *)appRemote didDisconnectWithError:(nullable NSError *)error {
+    
+}
+
+- (void)appRemote:(nonnull SPTAppRemote *)appRemote didFailConnectionAttemptWithError:(nullable NSError *)error {
+    
+}
+
+- (void)appRemoteDidEstablishConnection:(nonnull SPTAppRemote *)appRemote {
+    
+}
+
+- (void)playerStateDidChange:(nonnull id<SPTAppRemotePlayerState>)playerState {
+    
 }
 
 #pragma mark - UISceneSession lifecycle
