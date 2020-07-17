@@ -25,6 +25,13 @@
 		9BCFDAAB24BD156D009565C4 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFDAAA24BD156D009565C4 /* TrackCell.m */; };
 		9BE3CC5C24BF715600ED849A /* TrackDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */; };
 		9BE3CC5F24BFB8DC00ED849A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC5E24BFB8DC00ED849A /* LoginViewController.m */; };
+		9BE3CC6624C1FB8800ED849A /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC6524C1FB8800ED849A /* Track.m */; };
+		9BE3CC6924C1FB9700ED849A /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC6824C1FB9700ED849A /* Album.m */; };
+		9BE3CC6C24C1FBB500ED849A /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC6B24C1FBB500ED849A /* Artist.m */; };
+		9BE3CC6F24C1FBBD00ED849A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC6E24C1FBBD00ED849A /* User.m */; };
+		9BE3CC7224C1FBC600ED849A /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7124C1FBC600ED849A /* Playlist.m */; };
+		9BE3CC7524C1FCB000ED849A /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7424C1FCB000ED849A /* Image.m */; };
+		9BE3CC7824C1FCBB00ED849A /* AudioFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7724C1FCBB00ED849A /* AudioFeatures.m */; };
 		EB9F1C8AFE85FAE42309706E /* Pods_Bounce_BounceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */; };
 		FED40600C9347714EEA198C0 /* Pods_BounceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355A7877EB07D8403483D118 /* Pods_BounceTests.framework */; };
 /* End PBXBuildFile section */
@@ -87,6 +94,20 @@
 		9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackDetailsViewController.m; sourceTree = "<group>"; };
 		9BE3CC5D24BFB8DC00ED849A /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		9BE3CC5E24BFB8DC00ED849A /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		9BE3CC6424C1FB8800ED849A /* Track.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
+		9BE3CC6524C1FB8800ED849A /* Track.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
+		9BE3CC6724C1FB9700ED849A /* Album.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		9BE3CC6824C1FB9700ED849A /* Album.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		9BE3CC6A24C1FBB500ED849A /* Artist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
+		9BE3CC6B24C1FBB500ED849A /* Artist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
+		9BE3CC6D24C1FBBD00ED849A /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		9BE3CC6E24C1FBBD00ED849A /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		9BE3CC7024C1FBC600ED849A /* Playlist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
+		9BE3CC7124C1FBC600ED849A /* Playlist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
+		9BE3CC7324C1FCB000ED849A /* Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		9BE3CC7424C1FCB000ED849A /* Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		9BE3CC7624C1FCBB00ED849A /* AudioFeatures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFeatures.h; sourceTree = "<group>"; };
+		9BE3CC7724C1FCBB00ED849A /* AudioFeatures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFeatures.m; sourceTree = "<group>"; };
 		A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bounce_BounceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D93EBBBAED37A29BE63E14 /* Pods-Bounce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bounce.debug.xcconfig"; path = "Target Support Files/Pods-Bounce/Pods-Bounce.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,6 +218,20 @@
 			children = (
 				9BCFDA9C24BCEA36009565C4 /* ConnectButton.h */,
 				9BCFDA9D24BCEA36009565C4 /* ConnectButton.m */,
+				9BE3CC6424C1FB8800ED849A /* Track.h */,
+				9BE3CC6524C1FB8800ED849A /* Track.m */,
+				9BE3CC6724C1FB9700ED849A /* Album.h */,
+				9BE3CC6824C1FB9700ED849A /* Album.m */,
+				9BE3CC6A24C1FBB500ED849A /* Artist.h */,
+				9BE3CC6B24C1FBB500ED849A /* Artist.m */,
+				9BE3CC6D24C1FBBD00ED849A /* User.h */,
+				9BE3CC6E24C1FBBD00ED849A /* User.m */,
+				9BE3CC7024C1FBC600ED849A /* Playlist.h */,
+				9BE3CC7124C1FBC600ED849A /* Playlist.m */,
+				9BE3CC7324C1FCB000ED849A /* Image.h */,
+				9BE3CC7424C1FCB000ED849A /* Image.m */,
+				9BE3CC7624C1FCBB00ED849A /* AudioFeatures.h */,
+				9BE3CC7724C1FCBB00ED849A /* AudioFeatures.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -481,11 +516,18 @@
 				9BCFDA9E24BCEA36009565C4 /* ConnectButton.m in Sources */,
 				9BE3CC5C24BF715600ED849A /* TrackDetailsViewController.m in Sources */,
 				9BCFDA5C24BCCE2E009565C4 /* ViewController.m in Sources */,
+				9BE3CC6624C1FB8800ED849A /* Track.m in Sources */,
 				9BCFDAAB24BD156D009565C4 /* TrackCell.m in Sources */,
+				9BE3CC6F24C1FBBD00ED849A /* User.m in Sources */,
 				9BCFDAA824BD01AD009565C4 /* ProfileViewController.m in Sources */,
+				9BE3CC7824C1FCBB00ED849A /* AudioFeatures.m in Sources */,
+				9BE3CC7224C1FBC600ED849A /* Playlist.m in Sources */,
+				9BE3CC6C24C1FBB500ED849A /* Artist.m in Sources */,
 				9BCFDA5624BCCE2E009565C4 /* AppDelegate.m in Sources */,
 				9BCFDA6724BCCE2F009565C4 /* main.m in Sources */,
+				9BE3CC7524C1FCB000ED849A /* Image.m in Sources */,
 				9BCFDA9B24BCE9DC009565C4 /* ConnectView.m in Sources */,
+				9BE3CC6924C1FB9700ED849A /* Album.m in Sources */,
 				9BCFDA5924BCCE2E009565C4 /* SceneDelegate.m in Sources */,
 				9BE3CC5F24BFB8DC00ED849A /* LoginViewController.m in Sources */,
 				9BCFDAA524BD018B009565C4 /* SearchViewController.m in Sources */,

@@ -8,9 +8,10 @@
 
 #import "SearchViewController.h"
 #import "TrackCell.h"
+#import "AppDelegate.h"
 
 
-@interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *resultsArray;
@@ -26,17 +27,49 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
+    self.searchBar.showsSearchResultsButton = YES;
     
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if (searchText.length != 0) {
-        // fetch data with predicate from spotify api
-    }
-    [self.tableView reloadData];
- 
+
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    
+    // Do the search...
+    if (self.searchBar.searchTextField.text.length != 0) {
+        NSLog(@"Authorization Token: ", self.accessToken);
+         // fetch data with predicate from spotify api
+        NSDictionary *keys = [[NSDictionary alloc] initWithObjectsAndKeys:
+                              self.searchBar.searchTextField.text, @"q", nil];
+        NSError *error = nil;
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:keys options:kNilOptions error:&error];
+        NSURLResponse *response;
+        NSData *localData = nil;
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.spotify.com/v1/search"]];
+        [request setHTTPMethod:@"GET"];
+
+        if (error == nil)
+        {
+            [request setHTTPBody:jsonData];
+            [request setValue:[[NSUserDefaults standardUserDefaults]valueForKey:self.accessToken] forHTTPHeaderField:@"Authorization"];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+            // Send the request and get the response
+            localData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+
+            NSString *result = [[NSString alloc] initWithData:localData encoding:NSASCIIStringEncoding];
+            NSLog(@"Search results : %@", result);
+        }
+    }
+    
+    [self.tableView reloadData];
+    [searchBar resignFirstResponder];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = NO;

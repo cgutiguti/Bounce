@@ -11,6 +11,7 @@
 
 
 
+
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -88,16 +89,20 @@
       }];
 }
 - (IBAction)didTapSkip:(id)sender {
-    [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+    [self performSegueWithIdentifier:@"loginSegue" sender:self.accessToken];
 }
 
-/*
-#pragma mark - Navigation
 
+#pragma mark - Navigation
+/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"loginSegue"]) {
+           UIViewController *VC = [segue destinationViewController];
+           VC.accessToken = sender;
+       }
 }
 */
 

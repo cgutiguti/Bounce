@@ -1,6 +1,7 @@
 #import "ConnectView.h"
 #import "ViewController.h"
 #import "LoginViewController.h"
+#import "AppDelegate.h"
 
 static NSString * const SpotifyClientID = @"78a164a9d67e4cd4857e69bd9b70b2bb";
 static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
@@ -73,9 +74,10 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
 //    });
     if (session) {
         dispatch_async(dispatch_get_main_queue(), ^{
-             [self performSegueWithIdentifier:@"connectToLoginSegue" sender:self];
+            [self performSegueWithIdentifier:@"connectToLoginSegue" sender:session.accessToken];
         });
     }
+    
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didFailWithError:(NSError *)error
@@ -119,6 +121,17 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
                            animated:YES
                          completion:nil];
     });
+}
+#pragma mark - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"connectToLoginSegue"]) {
+        LoginViewController *loginVC = [segue destinationViewController];
+        loginVC.accessToken = sender;
+    }
 }
 
 @end

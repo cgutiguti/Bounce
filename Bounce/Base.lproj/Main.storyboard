@@ -102,7 +102,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7J-bo-9Y4">
-                                <rect key="frame" x="30" y="427" width="354" height="42"/>
+                                <rect key="frame" x="30" y="419" width="354" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="GK0-IC-tPi"/>
                                 </constraints>
@@ -140,7 +140,7 @@
                             <constraint firstItem="us5-5p-0vL" firstAttribute="top" secondItem="hob-9M-AdJ" secondAttribute="bottom" constant="22" id="fnb-ZR-jt9"/>
                             <constraint firstItem="0jT-wx-99Q" firstAttribute="trailing" secondItem="F7J-bo-9Y4" secondAttribute="trailing" constant="30" id="hlQ-Vb-MLa"/>
                             <constraint firstItem="iF6-Sk-3OY" firstAttribute="leading" secondItem="0jT-wx-99Q" secondAttribute="leading" constant="50" id="sMw-E5-n3m"/>
-                            <constraint firstItem="F7J-bo-9Y4" firstAttribute="top" secondItem="Zz9-HB-bAm" secondAttribute="bottom" constant="16" id="y4E-g0-SXa"/>
+                            <constraint firstItem="F7J-bo-9Y4" firstAttribute="top" secondItem="Zz9-HB-bAm" secondAttribute="bottom" constant="8" id="y4E-g0-SXa"/>
                             <constraint firstItem="0jT-wx-99Q" firstAttribute="trailing" secondItem="kQT-Uy-Si7" secondAttribute="trailing" constant="30" id="zer-53-JCB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0jT-wx-99Q"/>

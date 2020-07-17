@@ -11,10 +11,13 @@
 #import "SceneDelegate.h"
 #import <Parse/Parse.h>
 
+
+
 @interface AppDelegate ()<SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate>
 
 @property (nonatomic, strong) SPTAppRemote *appRemote;
-
+@property (nonatomic, strong) SPTSessionManager *sessionManager;
+@property (nonatomic, strong) SPTConfiguration *configuration;
 @property(nonatomic, strong) ViewController *rootViewController;
 
 @end
@@ -29,6 +32,8 @@
      self.window.rootViewController = self.rootViewController;
      [self.window makeKeyAndVisible];
     
+    
+    //Parse config
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         
         configuration.applicationId = @"bounce-parse";
@@ -47,30 +52,44 @@
     return YES;
 }
 - (void)sessionManager:(nonnull SPTSessionManager *)manager didFailWithError:(nonnull NSError *)error {
-    
+    NSLog(@"fail: %@", error);
 }
 
 - (void)sessionManager:(nonnull SPTSessionManager *)manager didInitiateSession:(nonnull SPTSession *)session {
     if (session) {
         NSLog(@"%@" , session.description);
     }
+    self.appRemote.connectionParameters.accessToken = session.accessToken;
+    [self.appRemote connect];
 }
 
 - (void)appRemote:(nonnull SPTAppRemote *)appRemote didDisconnectWithError:(nullable NSError *)error {
-    
+    NSLog(@"disconnected");
 }
 
 - (void)appRemote:(nonnull SPTAppRemote *)appRemote didFailConnectionAttemptWithError:(nullable NSError *)error {
-    
+    NSLog(@"failed.");
 }
 
 - (void)appRemoteDidEstablishConnection:(nonnull SPTAppRemote *)appRemote {
-    
+    NSLog(@"connected");
+    self.appRemote.playerAPI.delegate = self;
+    [self.appRemote.playerAPI subscribeToPlayerState:^(id _Nullable result, NSError * _Nullable error) {
+      if (error) {
+        NSLog(@"error: %@", error.localizedDescription);
+      }
+    }];
 }
 
 - (void)playerStateDidChange:(nonnull id<SPTAppRemotePlayerState>)playerState {
-    
+    NSLog(@"player state changed");
+    NSLog(@"Track name: %@", playerState.track.name);
 }
+//- (void)setAccessToken:(NSString *)accessToken {
+//    self.accessToken = accessToken;
+//}
+
+
 
 #pragma mark - UISceneSession lifecycle
 
