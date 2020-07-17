@@ -43,11 +43,11 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 ### Week 3
  - [ ] personal profile screen
  * - [ ] segue from personal top tracks to track details screen
- * - [ ] display "Hello, ______"
- * - [ ] view profile image and default if not set
+ * - [x] display "Hello, ______"
+ * - [x] view profile image and default if not set
  - [ ] Your affinities for genres (complex algorithm): on Affinities tab, view how much affinity you have for each genre
- - [ ] change profile image from profile tab
- - [ ] implement logout button
+ - [x] change profile image from profile tab
+ - [x] implement logout button
 ### Week 4
  - [ ] animations
  - [ ] image assets and design
