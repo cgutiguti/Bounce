@@ -9,6 +9,7 @@ target 'Bounce' do
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
   pod 'Parse'
+  pod 'AFOAuth2Manager'
 
   target 'BounceTests' do
     inherit! :search_paths

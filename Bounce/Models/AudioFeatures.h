@@ -12,18 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AudioFeatures : NSObject
 @property (nonatomic) NSString *id;
-@property (nonatomic) Float64 *acousticness;
-@property (nonatomic) Float64 *energy;
-@property (nonatomic) Float64 *danceability;
-@property (nonatomic) Float64 *loudness;
-@property (nonatomic) Float64 *liveness;
-@property (nonatomic) Float64 *instrumentalness;
-@property (nonatomic) Float64 *speechiness;
-@property (nonatomic) Float64 *valence;
-@property (nonatomic) Float64 *tempo;
-@property (nonatomic) NSInteger *key;
-@property (nonatomic) NSInteger *mode;
-@property (nonatomic) NSInteger *timeSig;
+@property (nonatomic) NSString *acousticness;
+@property (nonatomic) NSString *energy;
+@property (nonatomic) NSString *danceability;
+@property (nonatomic) NSString *loudness;
+@property (nonatomic) NSString *liveness;
+@property (nonatomic) NSString *instrumentalness;
+@property (nonatomic) NSString *speechiness;
+@property (nonatomic) NSString *valence;
+@property (nonatomic) NSString *tempo;
+@property (nonatomic) NSString *key;
+@property (nonatomic) NSString *mode;
+@property (nonatomic) NSString *timeSig;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

@@ -7,12 +7,15 @@
 //
 
 #import "TrackDetailsViewController.h"
+#import "SpotifyManager.h"
+#import "AudioFeatures.h"
+#import "Track.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TrackDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *albumView;
 @property (weak, nonatomic) IBOutlet UILabel *songNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *keyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeSigLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tempoLabel;
@@ -35,31 +38,48 @@
     
     [self.timeSigLabel setUserInteractionEnabled:YES];
     UITapGestureRecognizer *timeSigGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeSigClicked)];
-    [self.keyLabel addGestureRecognizer:timeSigGesture];
+    [self.timeSigLabel addGestureRecognizer:timeSigGesture];
     
     [self.tempoLabel setUserInteractionEnabled:YES];
     UITapGestureRecognizer *tempoGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tempoClicked)];
-    [self.keyLabel addGestureRecognizer:tempoGesture];
+    [self.tempoLabel addGestureRecognizer:tempoGesture];
     
     [self.loudnessLabel setUserInteractionEnabled:YES];
     UITapGestureRecognizer *loudnessGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loudnessClicked)];
-    [self.keyLabel addGestureRecognizer:loudnessGesture];
+    [self.loudnessLabel addGestureRecognizer:loudnessGesture];
     
     [self.valenceLabel setUserInteractionEnabled:YES];
     UITapGestureRecognizer *valenceGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valenceClicked)];
-    [self.keyLabel addGestureRecognizer:valenceGesture];
+    [self.valenceLabel addGestureRecognizer:valenceGesture];
     
     [self.acousticLabel setUserInteractionEnabled:YES];
     UITapGestureRecognizer *acousticGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(acousticClicked)];
-    [self.keyLabel addGestureRecognizer:acousticGesture];
+    [self.acousticLabel addGestureRecognizer:acousticGesture];
     
     [self.danceLabel setUserInteractionEnabled:YES];
     UITapGestureRecognizer *danceGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(danceClicked)];
-    [self.keyLabel addGestureRecognizer:danceGesture];
+    [self.danceLabel addGestureRecognizer:danceGesture];
     
     [self.energyLabel setUserInteractionEnabled:YES];
     UITapGestureRecognizer *energyGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(energyClicked)];
-    [self.keyLabel addGestureRecognizer:energyGesture];
+    [self.energyLabel addGestureRecognizer:energyGesture];
+    
+    
+    [[SpotifyManager shared] getAudioFeaturesForTrack:self.track.id accessToken:self.accessToken completion:^(NSDictionary * song, NSError * error) {
+        AudioFeatures *audioFeatures = [[AudioFeatures alloc] initWithDictionary:song];
+        self.acousticLabel.text = [NSString stringWithFormat:@"%@", audioFeatures.acousticness];
+        self.danceLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.danceability];
+        self.energyLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.energy];
+        self.keyLabel.text = [[NSString stringWithFormat:@"%@ ",audioFeatures.key] stringByAppendingString:audioFeatures.mode];
+        self.loudnessLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.loudness];
+        self.tempoLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.tempo];
+        self.valenceLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.valence];
+        self.timeSigLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.timeSig];
+        self.artistNameLabel.text = self.track.artists[0][@"name"];
+        self.songNameLabel.text = self.track.name;
+        NSURL *url = [NSURL URLWithString:self.track.album.image.url];
+        [self.albumView setImageWithURL:url];
+    }];
 }
 
 - (void) keyClicked{

@@ -11,8 +11,11 @@
 @implementation Album
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
-    if (self) {
-    }
+    self.type = @"album";
+    self.artists = dictionary[@"artists"];
+    self.name = dictionary[@"name"];
+    self.image = [[Image alloc] initWithDictionary:dictionary[@"images"][0]];
+    self.id = dictionary[@"id"];
     return self;
 }
 @end

@@ -32,6 +32,7 @@
 		9BE3CC7224C1FBC600ED849A /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7124C1FBC600ED849A /* Playlist.m */; };
 		9BE3CC7524C1FCB000ED849A /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7424C1FCB000ED849A /* Image.m */; };
 		9BE3CC7824C1FCBB00ED849A /* AudioFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7724C1FCBB00ED849A /* AudioFeatures.m */; };
+		9BE3CC7F24C5F4BD00ED849A /* SpotifyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7E24C5F4BD00ED849A /* SpotifyManager.m */; };
 		EB9F1C8AFE85FAE42309706E /* Pods_Bounce_BounceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */; };
 		FED40600C9347714EEA198C0 /* Pods_BounceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355A7877EB07D8403483D118 /* Pods_BounceTests.framework */; };
 /* End PBXBuildFile section */
@@ -108,6 +109,8 @@
 		9BE3CC7424C1FCB000ED849A /* Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		9BE3CC7624C1FCBB00ED849A /* AudioFeatures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFeatures.h; sourceTree = "<group>"; };
 		9BE3CC7724C1FCBB00ED849A /* AudioFeatures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFeatures.m; sourceTree = "<group>"; };
+		9BE3CC7D24C5F4BD00ED849A /* SpotifyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifyManager.h; sourceTree = "<group>"; };
+		9BE3CC7E24C5F4BD00ED849A /* SpotifyManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifyManager.m; sourceTree = "<group>"; };
 		A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bounce_BounceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D93EBBBAED37A29BE63E14 /* Pods-Bounce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bounce.debug.xcconfig"; path = "Target Support Files/Pods-Bounce/Pods-Bounce.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +182,7 @@
 		9BCFDA5324BCCE2E009565C4 /* Bounce */ = {
 			isa = PBXGroup;
 			children = (
+				9BE3CC7C24C5F48700ED849A /* API */,
 				9BCFDA9524BCE998009565C4 /* ViewControllers */,
 				9BCFDA9424BCE992009565C4 /* Views */,
 				9BCFDA9324BCE98B009565C4 /* Models */,
@@ -262,6 +266,15 @@
 				9BE3CC5E24BFB8DC00ED849A /* LoginViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9BE3CC7C24C5F48700ED849A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				9BE3CC7D24C5F4BD00ED849A /* SpotifyManager.h */,
+				9BE3CC7E24C5F4BD00ED849A /* SpotifyManager.m */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		9FBF745D46755A267DBFC4F3 /* Frameworks */ = {
@@ -518,6 +531,7 @@
 				9BCFDA5C24BCCE2E009565C4 /* ViewController.m in Sources */,
 				9BE3CC6624C1FB8800ED849A /* Track.m in Sources */,
 				9BCFDAAB24BD156D009565C4 /* TrackCell.m in Sources */,
+				9BE3CC7F24C5F4BD00ED849A /* SpotifyManager.m in Sources */,
 				9BE3CC6F24C1FBBD00ED849A /* User.m in Sources */,
 				9BCFDAA824BD01AD009565C4 /* ProfileViewController.m in Sources */,
 				9BE3CC7824C1FCBB00ED849A /* AudioFeatures.m in Sources */,

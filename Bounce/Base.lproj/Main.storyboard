@@ -183,7 +183,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="3Ju-bP-pp9">
+                            <searchBar contentMode="redraw" placeholder="Search for songs..." translatesAutoresizingMaskIntoConstraints="NO" id="3Ju-bP-pp9">
                                 <rect key="frame" x="0.0" y="56" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1pr-GD-XxJ"/>
@@ -521,7 +521,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Track Details" id="pTh-54-Avo"/>
                     <connections>
-                        <outlet property="acousticnessLabel" destination="b35-Dr-s5d" id="rBB-gt-a18"/>
+                        <outlet property="acousticLabel" destination="b35-Dr-s5d" id="52O-nJ-mnc"/>
                         <outlet property="albumView" destination="kbv-Wh-OZh" id="Snn-sr-QZ4"/>
                         <outlet property="artistNameLabel" destination="bdm-90-3OF" id="OcP-dQ-9xQ"/>
                         <outlet property="danceLabel" destination="Q9V-85-Gfu" id="0cD-rN-t0r"/>

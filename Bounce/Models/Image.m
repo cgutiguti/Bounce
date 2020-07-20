@@ -11,8 +11,10 @@
 @implementation Image
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
-    if (self) {
-    }
+
+//    self.height = dictionary[@"height"];
+//    self.width = dictionary[@"width"];
+    self.url = dictionary[@"url"];
     return self;
 }
 @end

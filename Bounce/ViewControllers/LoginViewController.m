@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "SearchViewController.h"
+#import "ProfileViewController.h"
 
 
 
@@ -94,16 +96,29 @@
 
 
 #pragma mark - Navigation
-/*
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
-           UIViewController *VC = [segue destinationViewController];
-           VC.accessToken = sender;
+        UITabBarController* tbc = [segue destinationViewController];
+        SearchViewController* searchVC = [[SearchViewController alloc] init];
+        ProfileViewController *profileVC = [[ProfileViewController alloc] init];
+        
+        UINavigationController *searchNav = [[UINavigationController alloc] init];
+        UINavigationController *profileNav = [[UINavigationController alloc] init];
+        
+        searchNav = (UINavigationController *)[[tbc customizableViewControllers] objectAtIndex:1];
+        profileNav = (UINavigationController *)[[tbc customizableViewControllers] objectAtIndex:2];
+        
+        searchVC = (SearchViewController *)[searchNav topViewController];
+        profileVC = (ProfileViewController *)[profileNav topViewController];
+        
+        searchVC.accessToken = self.accessToken;
+        profileVC.accessToken = self.accessToken;
        }
 }
-*/
+
 
 @end

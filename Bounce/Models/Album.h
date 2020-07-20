@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Image.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSString *type;
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSInteger *popularity;
-@property (nonatomic) NSArray *images;
+@property (nonatomic) Image *image;
 @property (nonatomic) NSArray *genres;
 @property (nonatomic) NSArray *artists;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

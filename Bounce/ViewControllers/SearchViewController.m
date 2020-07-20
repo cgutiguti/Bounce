@@ -9,7 +9,10 @@
 #import "SearchViewController.h"
 #import "TrackCell.h"
 #import "AppDelegate.h"
-
+#import "SpotifyManager.h"
+#import "Track.h"
+#import "UIImageView+AFNetworking.h"
+#import "TrackDetailsViewController.h"
 
 @interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -39,38 +42,28 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
     // Do the search...
     if (self.searchBar.searchTextField.text.length != 0) {
-        NSLog(@"Authorization Token: ", self.accessToken);
-         // fetch data with predicate from spotify api
-        NSDictionary *keys = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              self.searchBar.searchTextField.text, @"q", nil];
-        NSError *error = nil;
-        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:keys options:kNilOptions error:&error];
-        NSURLResponse *response;
-        NSData *localData = nil;
+        NSLog([@"Authorization Token: " stringByAppendingString:self.accessToken]);
         
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.spotify.com/v1/search"]];
-        [request setHTTPMethod:@"GET"];
-
-        if (error == nil)
-        {
-            [request setHTTPBody:jsonData];
-            [request setValue:[[NSUserDefaults standardUserDefaults]valueForKey:self.accessToken] forHTTPHeaderField:@"Authorization"];
-            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-
-            // Send the request and get the response
-            localData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-
-            NSString *result = [[NSString alloc] initWithData:localData encoding:NSASCIIStringEncoding];
-            NSLog(@"Search results : %@", result);
-        }
+         // fetch data with predicate from spotify api
+        //[self doSearchUsingHTTPDefault];
+        [self doSearchUsingManager];
     }
     
     [self.tableView reloadData];
     [searchBar resignFirstResponder];
 }
+
+- (void)doSearchUsingManager {
+    [[SpotifyManager shared] searchForSong:self.searchBar.searchTextField.text accessToken:self.accessToken completion:^(NSDictionary * _Nonnull array, NSError * _Nonnull error) {
+        self.resultsArray = array[@"tracks"][@"items"];
+//        self.resultsArray = [[NSMutableArray alloc] init];
+//        self.resultsArray = [NSJSONSerialization JSONObjectWithData:array options:NSJSONReadingMutableContainers error:nil];
+        
+    }];
+}
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
@@ -80,13 +73,18 @@
   
     TrackCell *cell = [tableView dequeueReusableCellWithIdentifier: @"TrackCell"];
     // *track = self.resultsArray[indexPath.row];
-    
+    Track *track = [[Track alloc] initWithDictionary:self.resultsArray[indexPath.row]];
+    cell.trackArtistLabel.text = track.artists[0][@"name"];
+    cell.trackTitleLabel.text = track.name;
+    cell.track = track;
+    NSURL *url = [NSURL URLWithString:track.album.image.url];
+    [cell.albumArtView setImageWithURL:url];
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.resultsArray.count;
+    return 20;
 }
 
 #pragma mark - Navigation
@@ -95,6 +93,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    TrackCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Track *track = [[Track alloc] initWithDictionary:self.resultsArray[indexPath.row]];
+    TrackDetailsViewController *detailsVC = [segue destinationViewController];
+    detailsVC.accessToken = self.accessToken;
+    detailsVC.track = track;
+    
+
 }
 
 
