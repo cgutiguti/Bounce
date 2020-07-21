@@ -21,25 +21,24 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 ## Timeline
 ### Week 1
  - [x] Set up spotify SDK and get working Spotify authentication
- - [ ] Set up models and API endpoints GET functions
-  * - [ ] track
-  * - [ ] artist
-  * - [ ] user
+ - [x] Set up models and API endpoints GET functions
+  * - [x] track
+  * - [x] artist
   * - [ ] playlist
-  * - [ ] album
+  * - [x] album
  - [x] Set up skeleton navigational views
  - [x] Set up account creation and linking with Spotify. 
 ### Week 2
- - [ ] Search bar
+ - [x] Search bar
  * - [x] clicking on search bar brings up keyboard
- * - [ ] detection of typed changes refreshes search results
+ * - [x] detection of typed changes refreshes search results
  * - [x] dismiss keyboard
- - [ ] Present search results functionality 
- * - [ ] click on artists/tracks to go to details screens
- * - [ ] scrolling
+ - [x] Present search results functionality 
+ * - [x] click on artists/tracks to go to details screens
+ * - [x] scrolling
  - [ ] artist details screen
  * - [ ] segue from top tracks to track details screen?
- - [ ] track audio features screen
+ - [x] track audio features screen
 ### Week 3
  - [ ] personal profile screen
  * - [ ] segue from personal top tracks to track details screen
@@ -52,6 +51,13 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
  - [ ] animations
  - [ ] image assets and design
  - [ ] Auto Layout
+### Bugs that need to be fixed
+- [ ] first search button press doesn't update table view
+- [ ] remove decimal places of audio features and multiply by 100
+- [ ] time signature audio feature doesn't show up correctly
+- [ ] changing artist/track filter should execute another search
+- [ ] changing profile picture should upload it to Parse server
+ 
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
