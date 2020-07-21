@@ -57,7 +57,8 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 - [ ] time signature audio feature doesn't show up correctly
 - [ ] changing artist/track filter should execute another search
 - [ ] changing profile picture should upload it to Parse server
- 
+- [ ] after logging out once, the login view controller is never called.
+- [ ] logging in on the login view controller does not work. (connection to daemon was invalidated)
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
