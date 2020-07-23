@@ -37,6 +37,7 @@
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     self.searchBar.showsSearchResultsButton = NO;
+    [self.typeControl addTarget:self action:@selector(doSearchUsingManager) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

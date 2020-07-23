@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property BOOL isEditing;
 @property (strong, nonatomic) NSArray *topTracksArray;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *timeRangeControl;
 @property (strong, nonatomic) NSArray *topArtistsArray;
 @end
 
@@ -48,25 +49,55 @@
     [self.profileView setUserInteractionEnabled:NO];
     UITapGestureRecognizer *profileViewGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileViewClicked)];
     [self.profileView addGestureRecognizer:profileViewGesture];
-    
+    [self.timeRangeControl addTarget:self action:@selector(didChangeTimeRange) forControlEvents:UIControlEventValueChanged];
     // Do any additional setup after loading the view.
     self.profileView.layer.cornerRadius = self.profileView.frame.size.width/2;
     self.profileView.clipsToBounds = YES;
 }
 
 - (void)fetchTopTracks {
-    [[SpotifyManager shared] getPersonalTopTracks:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
-        self.topTracksArray = dictionary[@"items"];
-        [self.tableView reloadData];
-    }];
+    if ([self.timeRangeControl selectedSegmentIndex] == 0){ //short term
+        [[SpotifyManager shared] getPersonalTopTracks:@"?time_range=short_term" accessToken:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
+            self.topTracksArray = dictionary[@"items"];
+            [self.tableView reloadData];
+        }];
+    } else if ([self.timeRangeControl selectedSegmentIndex] == 1){ //medium term
+        [[SpotifyManager shared] getPersonalTopTracks:@"?time_range=medium_term" accessToken:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
+            self.topTracksArray = dictionary[@"items"];
+            [self.tableView reloadData];
+        }];
+    } else { //long term
+        [[SpotifyManager shared] getPersonalTopTracks:@"?time_range=long_term" accessToken:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
+            self.topTracksArray = dictionary[@"items"];
+            [self.tableView reloadData];
+        }];
+    }
 }
 
 - (void)fetchTopArtists {
-    [[SpotifyManager shared] getPersonalTopArtists:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
-        self.topArtistsArray = dictionary[@"items"];
-        [self.tableView reloadData];
-    }];
+    if ([self.timeRangeControl selectedSegmentIndex] == 0){ //short term
+        [[SpotifyManager shared] getPersonalTopArtists:@"?time_range=short_term" accessToken:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
+            self.topArtistsArray = dictionary[@"items"];
+            [self.tableView reloadData];
+        }];
+    } else if ([self.timeRangeControl selectedSegmentIndex] == 1){ //medium term
+        [[SpotifyManager shared] getPersonalTopArtists:@"?time_range=medium_term" accessToken:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
+            self.topArtistsArray = dictionary[@"items"];
+            [self.tableView reloadData];
+        }];
+    } else { //long term
+        [[SpotifyManager shared] getPersonalTopArtists:@"?time_range=long_term" accessToken:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
+            self.topArtistsArray = dictionary[@"items"];
+            [self.tableView reloadData];
+        }];
+    }
 }
+
+- (void)didChangeTimeRange {
+    [self fetchTopArtists];
+    [self fetchTopTracks];
+}
+
 - (IBAction)didTapLogout:(id)sender {
     SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

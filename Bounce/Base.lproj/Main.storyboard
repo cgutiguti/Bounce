@@ -963,6 +963,7 @@
                         <outlet property="editingView" destination="cth-fN-cQx" id="b9a-hH-ZcH"/>
                         <outlet property="profileView" destination="vhs-7Q-MpM" id="XBQ-hz-qNW"/>
                         <outlet property="tableView" destination="t1P-SM-9dg" id="DOH-SQ-RJC"/>
+                        <outlet property="timeRangeControl" destination="0dP-La-ice" id="722-Pe-ZPK"/>
                         <outlet property="userLabel" destination="6yn-k1-JUM" id="jJy-HF-2bw"/>
                     </connections>
                 </viewController>

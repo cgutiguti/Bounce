@@ -95,15 +95,15 @@ static NSString * const personalTopTracksRequestBase = @"/v1/me/top/";
     }];
 }
 
-- (void) getPersonalTopTracks:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
-    NSString *request = [personalTopTracksRequestBase stringByAppendingString:@"tracks"];
+- (void) getPersonalTopTracks:(NSString *)time_range accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = [[personalTopTracksRequestBase stringByAppendingString:@"tracks"] stringByAppendingString:time_range];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];
 }
 
-- (void) getPersonalTopArtists:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
-    NSString *request = [personalTopTracksRequestBase stringByAppendingString:@"artists"];
+- (void) getPersonalTopArtists:(NSString *)time_range accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = [[personalTopTracksRequestBase stringByAppendingString:@"artists"] stringByAppendingString:time_range];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];

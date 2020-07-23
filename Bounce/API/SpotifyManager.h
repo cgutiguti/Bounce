@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) searchForArtist:(NSString *)songQueryURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion;
 - (void) getArtistTopTracks:(NSString *)artistID  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion;
 - (void) getRelatedArtists:(NSString *)artistID  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion;
-- (void) getPersonalTopTracks:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion;
-- (void) getPersonalTopArtists:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion;
+- (void) getPersonalTopTracks:(NSString *)time_range accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion;
+- (void) getPersonalTopArtists:(NSString *)time_range accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion;
 @end
 
 NS_ASSUME_NONNULL_END
