@@ -45,7 +45,7 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
      permissions the user is asked to grant.
      For more information, see https://developer.spotify.com/web-api/using-scopes/.
      */
-    SPTScope scope = SPTUserLibraryReadScope | SPTPlaylistReadPrivateScope;
+    SPTScope scope = SPTPlaylistReadPrivateScope | SPTPlaylistModifyPublicScope | SPTPlaylistModifyPrivateScope |SPTUserFollowReadScope | SPTUserFollowModifyScope | SPTUserLibraryReadScope | SPTUserLibraryModifyScope | SPTUserTopReadScope | SPTAppRemoteControlScope | SPTUserReadEmailScope | SPTUserReadPrivateScope | SPTStreamingScope;
 
     /*
      Start the authorization process. This requires user input.

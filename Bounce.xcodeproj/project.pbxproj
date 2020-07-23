@@ -33,6 +33,9 @@
 		9BE3CC7524C1FCB000ED849A /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7424C1FCB000ED849A /* Image.m */; };
 		9BE3CC7824C1FCBB00ED849A /* AudioFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7724C1FCBB00ED849A /* AudioFeatures.m */; };
 		9BE3CC7F24C5F4BD00ED849A /* SpotifyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC7E24C5F4BD00ED849A /* SpotifyManager.m */; };
+		9BE3CC8224C74D3600ED849A /* ArtistCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC8124C74D3600ED849A /* ArtistCell.m */; };
+		9BE3CC8524C75B2500ED849A /* ArtistDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC8424C75B2500ED849A /* ArtistDetailsViewController.m */; };
+		9BE3CC8824C7754E00ED849A /* ArtistDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC8724C7754E00ED849A /* ArtistDetailsCell.m */; };
 		EB9F1C8AFE85FAE42309706E /* Pods_Bounce_BounceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */; };
 		FED40600C9347714EEA198C0 /* Pods_BounceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355A7877EB07D8403483D118 /* Pods_BounceTests.framework */; };
 /* End PBXBuildFile section */
@@ -111,6 +114,12 @@
 		9BE3CC7724C1FCBB00ED849A /* AudioFeatures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFeatures.m; sourceTree = "<group>"; };
 		9BE3CC7D24C5F4BD00ED849A /* SpotifyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifyManager.h; sourceTree = "<group>"; };
 		9BE3CC7E24C5F4BD00ED849A /* SpotifyManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifyManager.m; sourceTree = "<group>"; };
+		9BE3CC8024C74D3600ED849A /* ArtistCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtistCell.h; sourceTree = "<group>"; };
+		9BE3CC8124C74D3600ED849A /* ArtistCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistCell.m; sourceTree = "<group>"; };
+		9BE3CC8324C75B2500ED849A /* ArtistDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtistDetailsViewController.h; sourceTree = "<group>"; };
+		9BE3CC8424C75B2500ED849A /* ArtistDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistDetailsViewController.m; sourceTree = "<group>"; };
+		9BE3CC8624C7754E00ED849A /* ArtistDetailsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtistDetailsCell.h; sourceTree = "<group>"; };
+		9BE3CC8724C7754E00ED849A /* ArtistDetailsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistDetailsCell.m; sourceTree = "<group>"; };
 		A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bounce_BounceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D93EBBBAED37A29BE63E14 /* Pods-Bounce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bounce.debug.xcconfig"; path = "Target Support Files/Pods-Bounce/Pods-Bounce.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -247,6 +256,10 @@
 				9BCFDA9A24BCE9DC009565C4 /* ConnectView.m */,
 				9BCFDAA924BD156D009565C4 /* TrackCell.h */,
 				9BCFDAAA24BD156D009565C4 /* TrackCell.m */,
+				9BE3CC8024C74D3600ED849A /* ArtistCell.h */,
+				9BE3CC8124C74D3600ED849A /* ArtistCell.m */,
+				9BE3CC8624C7754E00ED849A /* ArtistDetailsCell.h */,
+				9BE3CC8724C7754E00ED849A /* ArtistDetailsCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,6 +277,8 @@
 				9BE3CC5B24BF715600ED849A /* TrackDetailsViewController.m */,
 				9BE3CC5D24BFB8DC00ED849A /* LoginViewController.h */,
 				9BE3CC5E24BFB8DC00ED849A /* LoginViewController.m */,
+				9BE3CC8324C75B2500ED849A /* ArtistDetailsViewController.h */,
+				9BE3CC8424C75B2500ED849A /* ArtistDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -535,7 +550,9 @@
 				9BE3CC6F24C1FBBD00ED849A /* User.m in Sources */,
 				9BCFDAA824BD01AD009565C4 /* ProfileViewController.m in Sources */,
 				9BE3CC7824C1FCBB00ED849A /* AudioFeatures.m in Sources */,
+				9BE3CC8824C7754E00ED849A /* ArtistDetailsCell.m in Sources */,
 				9BE3CC7224C1FBC600ED849A /* Playlist.m in Sources */,
+				9BE3CC8524C75B2500ED849A /* ArtistDetailsViewController.m in Sources */,
 				9BE3CC6C24C1FBB500ED849A /* Artist.m in Sources */,
 				9BCFDA5624BCCE2E009565C4 /* AppDelegate.m in Sources */,
 				9BCFDA6724BCCE2F009565C4 /* main.m in Sources */,
@@ -544,6 +561,7 @@
 				9BE3CC6924C1FB9700ED849A /* Album.m in Sources */,
 				9BCFDA5924BCCE2E009565C4 /* SceneDelegate.m in Sources */,
 				9BE3CC5F24BFB8DC00ED849A /* LoginViewController.m in Sources */,
+				9BE3CC8224C74D3600ED849A /* ArtistCell.m in Sources */,
 				9BCFDAA524BD018B009565C4 /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -743,6 +761,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.carmen.justine.gutierrez.Bounce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -781,6 +800,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.carmen.justine.gutierrez.Bounce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

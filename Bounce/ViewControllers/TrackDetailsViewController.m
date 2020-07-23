@@ -5,12 +5,13 @@
 //  Created by Carmen Gutierrez on 7/15/20.
 //  Copyright © 2020 Carmen Gutierrez. All rights reserved.
 //
-
+@import AlertTransition;
 #import "TrackDetailsViewController.h"
 #import "SpotifyManager.h"
 #import "AudioFeatures.h"
 #import "Track.h"
 #import "UIImageView+AFNetworking.h"
+#import "AppDelegate.h"
 
 @interface TrackDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *albumView;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *acousticLabel;
 @property (weak, nonatomic) IBOutlet UILabel *danceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *energyLabel;
+@property (strong, nonatomic) AppDelegate *delegate;
 
 @end
 
@@ -32,6 +34,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    [self.delegate.appRemote connect];
+//    [self.delegate.appRemote isConnected];
+    
     [self.keyLabel setUserInteractionEnabled:YES];
     UITapGestureRecognizer *keyGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyClicked)];
     [self.keyLabel addGestureRecognizer:keyGesture];
@@ -64,6 +70,10 @@
     UITapGestureRecognizer *energyGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(energyClicked)];
     [self.energyLabel addGestureRecognizer:energyGesture];
     
+//    [self.albumView setUserInteractionEnabled:YES];
+//    UITapGestureRecognizer *playSongGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(albumViewClicked)];
+//    [self.albumView addGestureRecognizer:playSongGesture];
+    
     
     [[SpotifyManager shared] getAudioFeaturesForTrack:self.track.id accessToken:self.accessToken completion:^(NSDictionary * song, NSError * error) {
         AudioFeatures *audioFeatures = [[AudioFeatures alloc] initWithDictionary:song];
@@ -74,14 +84,27 @@
         self.loudnessLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.loudness];
         self.tempoLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.tempo];
         self.valenceLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.valence];
-        self.timeSigLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.timeSig];
+        self.timeSigLabel.text = [NSString stringWithFormat:@"%@", audioFeatures.timeSig];
         self.artistNameLabel.text = self.track.artists[0][@"name"];
         self.songNameLabel.text = self.track.name;
         NSURL *url = [NSURL URLWithString:self.track.album.image.url];
         [self.albumView setImageWithURL:url];
     }];
 }
+- (void) albumViewClicked {
+    [self.delegate.appRemote connect];
+    NSString *songURI = [@"spotify:track:" stringByAppendingString:self.track.id];
+    NSLog(@"Song URI: %@", songURI);
+    [self playSong:songURI];
+}
 
+- (void) playSong:(NSString *)songURI {
+    [self.delegate.appRemote connect];
+       
+    [self.delegate.appRemote.playerAPI play:songURI callback:^(id  _Nullable result, NSError * _Nullable error) {
+            NSLog(@"Playing song.");
+       }];
+}
 - (void) keyClicked{
     [self presentAlertControllerWithTitle:@"Musical Key"
                                   message:@"The key the track is in. Integers map to pitches using standard Pitch Class notation. E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on."

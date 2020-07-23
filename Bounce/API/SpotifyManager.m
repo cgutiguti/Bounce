@@ -17,6 +17,9 @@ static NSString * const baseURL =@"https://api.spotify.com";
 static NSString * const trackRequestBase = @"/v1/tracks/";
 static NSString * const searchRequestBase = @"/v1/search?q=";
 static NSString * const audioFeaturesRequestBase = @"/v1/audio-features/";
+static NSString * const artistTopTracksRequestBase = @"/v1/artists/";
+static NSString * const personalTopTracksRequestBase = @"/v1/me/top/";
+
 
 
 @implementation SpotifyManager
@@ -30,17 +33,16 @@ static NSString * const audioFeaturesRequestBase = @"/v1/audio-features/";
     return sharedObject;
 }
 
--(instancetype)init{
+-(instancetype) init{
     self = [super initWithBaseURL:[NSURL URLWithString:baseURL] clientID:spotifyClientID secret:spotifySecretClientID];
     return self;
 
 }
 
--(void)getSong:(NSString *)songURI accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
-    
+- (void) doGetRequest:(NSString *)request accessToken: (NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     self.requestSerializer = [AFHTTPRequestSerializer serializer];
     [self.requestSerializer setValue:[NSString stringWithFormat:@"Bearer  %@",token] forHTTPHeaderField:@"Authorization"];
-    [self GET:[trackRequestBase stringByAppendingString:songURI]
+    [self GET:request
     parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable response) {
         
          NSLog(@"Response from GET: %@", response );
@@ -53,41 +55,57 @@ static NSString * const audioFeaturesRequestBase = @"/v1/audio-features/";
         completion(nil,error);
     }];
 }
+- (void) getSong:(NSString *)songURI accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = [trackRequestBase stringByAppendingString:songURI];
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
+    }];
+    
+}
 - (void) searchForSong:(NSString *)songQueryURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
-    self.requestSerializer = [AFHTTPRequestSerializer serializer];
-    [self.requestSerializer setValue:[NSString stringWithFormat:@"Bearer  %@",token] forHTTPHeaderField:@"Authorization"];
     NSString *request = [[searchRequestBase stringByAppendingString:songQueryURI] stringByAppendingString:@"&type=track"];
-
-    [self GET:request parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable response) {
-           
-            NSLog(@"Response from GET: %@", response );
-             completion(response, nil);
-                             
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-           
-           //Error
-           NSLog(@"Error from GET: %@", error.description);
-           completion(nil,error);
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
     }];
 }
+ - (void) searchForArtist:(NSString *)songQueryURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+     NSString *request = [[searchRequestBase stringByAppendingString:songQueryURI] stringByAppendingString:@"&type=artist"];
+     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+         completion(dict, error);
+     }];
+ }
 
 - (void) getAudioFeaturesForTrack:(NSString *)songURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
-    self.requestSerializer = [AFHTTPRequestSerializer serializer];
-    [self.requestSerializer setValue:[NSString stringWithFormat:@"Bearer  %@",token] forHTTPHeaderField:@"Authorization"];
     NSString *request = [audioFeaturesRequestBase stringByAppendingString:songURI];
-
-    [self GET:request parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable response) {
-           
-            NSLog(@"Response from GET: %@", response );
-             completion(response, nil);
-                             
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-           
-           //Error
-           NSLog(@"Error from GET: %@", error.description);
-           completion(nil,error);
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
+    }];
+}
+- (void) getArtistTopTracks:(NSString *)artistID  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = [[artistTopTracksRequestBase stringByAppendingString:artistID] stringByAppendingString:@"/top-tracks?country=from_token"];
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
     }];
 }
 
+- (void) getRelatedArtists:(NSString *)artistID  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = [[artistTopTracksRequestBase stringByAppendingString:artistID] stringByAppendingString:@"/related-artists"];
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
+    }];
+}
 
+- (void) getPersonalTopTracks:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = [personalTopTracksRequestBase stringByAppendingString:@"tracks"];
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
+    }];
+}
+
+- (void) getPersonalTopArtists:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = [personalTopTracksRequestBase stringByAppendingString:@"artists"];
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
+    }];
+}
 @end

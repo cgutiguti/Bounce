@@ -13,9 +13,8 @@
 
 
 
-@interface AppDelegate ()<SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate>
+@interface AppDelegate ()
 
-@property (nonatomic, strong) SPTAppRemote *appRemote;
 @property (nonatomic, strong) SPTSessionManager *sessionManager;
 @property (nonatomic, strong) SPTConfiguration *configuration;
 @property(nonatomic, strong) ViewController *rootViewController;
@@ -41,6 +40,8 @@
     }];
     
     [Parse initializeWithConfiguration:config];
+    self.appRemote = [[SPTAppRemote alloc] initWithConfiguration:self.configuration logLevel:SPTAppRemoteLogLevelDebug];
+    self.appRemote.delegate = self;
      return YES;
 }
 - (BOOL)application:(UIApplication *)application

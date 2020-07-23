@@ -1,6 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-Bounce/Pods-Bounce-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
 ${BUILT_PRODUCTS_DIR}/AFOAuth2Manager/AFOAuth2Manager.framework
+${BUILT_PRODUCTS_DIR}/AlertTransition/AlertTransition.framework
 ${BUILT_PRODUCTS_DIR}/BDBOAuth1Manager/BDBOAuth1Manager.framework
 ${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework
 ${BUILT_PRODUCTS_DIR}/Parse/Parse.framework

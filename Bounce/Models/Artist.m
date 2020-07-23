@@ -11,8 +11,15 @@
 @implementation Artist
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
-    if (self) {
+    self.id = dictionary[@"id"];
+    self.name = dictionary[@"name"];
+    self.type = @"artist";
+    NSDictionary *images = dictionary[@"images"];
+    if (images.count != 0){
+        self.image = [[Image alloc] initWithDictionary:dictionary[@"images"][0]];
     }
+    self.genres = dictionary[@"genres"];
+    self.popularity = dictionary[@"popularity"];
     return self;
 }
 @end

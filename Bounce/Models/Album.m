@@ -7,6 +7,7 @@
 //
 
 #import "Album.h"
+#import "Image.h"
 
 @implementation Album
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
@@ -16,6 +17,7 @@
     self.name = dictionary[@"name"];
     self.image = [[Image alloc] initWithDictionary:dictionary[@"images"][0]];
     self.id = dictionary[@"id"];
+
     return self;
 }
 @end

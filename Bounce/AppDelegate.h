@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SpotifyiOS/SpotifyiOS.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate>
+
 
 @property (strong, nonatomic) UIWindow *window;
 //@property (nonatomic, strong) NSString *accessToken;
 //- (void)setAccessToken:(NSString *)accessToken;
+@property (nonatomic) SPTAppRemote *appRemote;
 @end
 

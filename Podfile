@@ -10,6 +10,7 @@ target 'Bounce' do
   pod 'BDBOAuth1Manager'
   pod 'Parse'
   pod 'AFOAuth2Manager'
+  pod 'AlertTransition', "~> 2.1.0"
 
   target 'BounceTests' do
     inherit! :search_paths

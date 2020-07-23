@@ -16,6 +16,11 @@ PODS:
     - AFNetworking/NSURLSession
   - AFOAuth2Manager (3.0.0):
     - AFNetworking/NSURLSession (~> 3.0)
+  - AlertTransition (2.1.0):
+    - AlertTransition/Easy (= 2.1.0)
+  - AlertTransition/Core (2.1.0)
+  - AlertTransition/Easy (2.1.0):
+    - AlertTransition/Core
   - BDBOAuth1Manager (2.0.0):
     - AFNetworking/NSURLSession (~> 3.0.0)
   - Bolts/Tasks (1.9.1)
@@ -27,6 +32,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - AFOAuth2Manager
+  - AlertTransition (~> 2.1.0)
   - BDBOAuth1Manager
   - Parse
 
@@ -34,6 +40,7 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - AFOAuth2Manager
+    - AlertTransition
     - BDBOAuth1Manager
     - Bolts
     - Parse
@@ -41,10 +48,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   AFOAuth2Manager: 0566da1be64883e339813d411229fdc9a84dab7c
+  AlertTransition: a5ebd60b8858b2530be539686bd301ec61e5634f
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: b4830395a44bc2684f3e12a36a8dd0c91cb2c7cf
+PODFILE CHECKSUM: 739ff1a6e31991655089de48d64352cc0146304f
 
 COCOAPODS: 1.9.3
