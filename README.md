@@ -21,28 +21,27 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 ## Timeline
 ### Week 1
  - [x] Set up spotify SDK and get working Spotify authentication
- - [ ] Set up models and API endpoints GET functions
-  * - [ ] track
-  * - [ ] artist
-  * - [ ] user
+ - [x] Set up models and API endpoints GET functions
+  * - [x] track
+  * - [x] artist
   * - [ ] playlist
-  * - [ ] album
+  * - [x] album
  - [x] Set up skeleton navigational views
  - [x] Set up account creation and linking with Spotify. 
 ### Week 2
- - [ ] Search bar
+ - [x] Search bar
  * - [x] clicking on search bar brings up keyboard
- * - [ ] detection of typed changes refreshes search results
+ * - [x] detection of typed changes refreshes search results
  * - [x] dismiss keyboard
- - [ ] Present search results functionality 
- * - [ ] click on artists/tracks to go to details screens
- * - [ ] scrolling
- - [ ] artist details screen
- * - [ ] segue from top tracks to track details screen?
- - [ ] track audio features screen
+ - [x] Present search results functionality 
+ * - [x] click on artists/tracks to go to details screens
+ * - [x] scrolling
+ - [x] artist details screen
+ * - [x] segue from top tracks to track details screen?
+ - [x] track audio features screen
 ### Week 3
- - [ ] personal profile screen
- * - [ ] segue from personal top tracks to track details screen
+ - [x] personal profile screen
+ * - [x] segue from personal top tracks to track details screen
  * - [x] display "Hello, ______"
  * - [x] view profile image and default if not set
  - [ ] Your affinities for genres (complex algorithm): on Affinities tab, view how much affinity you have for each genre
@@ -52,6 +51,15 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
  - [ ] animations
  - [ ] image assets and design
  - [ ] Auto Layout
+### Bugs that need to be fixed
+- [x] artist details screen top tracks table view and related artists table view didn't stay loaded for long (SOLUTION: make arrays have strong attribute)
+- [x] first search button press doesn't update table view
+- [x] remove decimal places of audio features and multiply by 100
+- [ ] time signature audio feature doesn't show up correctly
+- [x] changing artist/track filter should execute another search
+- [ ] changing profile picture should upload it to Parse server
+- [ ] after logging out once, the login view controller is never called.
+- [ ] logging in on the login view controller does not work. (connection to daemon was invalidated)
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
