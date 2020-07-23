@@ -40,8 +40,8 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
  * - [x] segue from top tracks to track details screen?
  - [x] track audio features screen
 ### Week 3
- - [ ] personal profile screen
- * - [ ] segue from personal top tracks to track details screen
+ - [x] personal profile screen
+ * - [x] segue from personal top tracks to track details screen
  * - [x] display "Hello, ______"
  * - [x] view profile image and default if not set
  - [ ] Your affinities for genres (complex algorithm): on Affinities tab, view how much affinity you have for each genre
@@ -53,10 +53,10 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
  - [ ] Auto Layout
 ### Bugs that need to be fixed
 - [x] artist details screen top tracks table view and related artists table view didn't stay loaded for long (SOLUTION: make arrays have strong attribute)
-- [ ] first search button press doesn't update table view
-- [ ] remove decimal places of audio features and multiply by 100
+- [x] first search button press doesn't update table view
+- [x] remove decimal places of audio features and multiply by 100
 - [ ] time signature audio feature doesn't show up correctly
-- [ ] changing artist/track filter should execute another search
+- [x] changing artist/track filter should execute another search
 - [ ] changing profile picture should upload it to Parse server
 - [ ] after logging out once, the login view controller is never called.
 - [ ] logging in on the login view controller does not work. (connection to daemon was invalidated)
