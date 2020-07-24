@@ -52,7 +52,15 @@
         ArtistDetailsCell *cell =[tableView dequeueReusableCellWithIdentifier: @"ArtistDetailsCell"];
         cell.artistNameLabel.text = self.artist.name;
         //cell.artistPopularityLabel.text = self.artist.popularity;
-        //cell.genresLabel.text = self.artist.genres[0];
+        NSString *genresList = @"";
+        for (NSDictionary *genre in self.artist.genres) {
+                  if(genresList.length == 0) {
+                      genresList = [genresList stringByAppendingString:genre];
+                  } else {
+                      genresList = [genresList stringByAppendingFormat:@", %@", genre];
+                  }
+              }
+        cell.genresLabel.text = genresList;
         NSURL *url = [NSURL URLWithString:self.artist.image.url];
         [cell.artistImageView setImageWithURL:url];
         cell.artistImageView.layer.cornerRadius =  cell.artistImageView.frame.size.width/2;
@@ -65,6 +73,8 @@
         cell.track = track;
         NSURL *url = [NSURL URLWithString:track.album.image.url];
         [cell.albumArtView setImageWithURL:url];
+        cell.albumArtView.layer.cornerRadius =  5;
+        cell.albumArtView.clipsToBounds = YES;
         return cell;
     } else { // related artists section
         ArtistCell *cell = [tableView dequeueReusableCellWithIdentifier: @"ArtistCell"];

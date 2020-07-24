@@ -11,6 +11,7 @@ target 'Bounce' do
   pod 'Parse'
   pod 'AFOAuth2Manager'
   pod 'AlertTransition', "~> 2.1.0"
+  pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git'
 
   target 'BounceTests' do
     inherit! :search_paths

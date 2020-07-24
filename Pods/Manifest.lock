@@ -1,4 +1,5 @@
 PODS:
+  - AAChartKit (5.0.3)
   - AFNetworking (3.0.4):
     - AFNetworking/NSURLSession (= 3.0.4)
     - AFNetworking/Reachability (= 3.0.4)
@@ -30,6 +31,7 @@ PODS:
     - Bolts/Tasks (= 1.9.1)
 
 DEPENDENCIES:
+  - AAChartKit (from `https://github.com/AAChartModel/AAChartKit.git`)
   - AFNetworking
   - AFOAuth2Manager
   - AlertTransition (~> 2.1.0)
@@ -45,7 +47,17 @@ SPEC REPOS:
     - Bolts
     - Parse
 
+EXTERNAL SOURCES:
+  AAChartKit:
+    :git: https://github.com/AAChartModel/AAChartKit.git
+
+CHECKOUT OPTIONS:
+  AAChartKit:
+    :commit: 93cdc21995501f830f38f4bfd37e596b2f19c057
+    :git: https://github.com/AAChartModel/AAChartKit.git
+
 SPEC CHECKSUMS:
+  AAChartKit: 6fd57eb5efd51335281d07cfbf71896368e75d28
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   AFOAuth2Manager: 0566da1be64883e339813d411229fdc9a84dab7c
   AlertTransition: a5ebd60b8858b2530be539686bd301ec61e5634f
@@ -53,6 +65,6 @@ SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: 739ff1a6e31991655089de48d64352cc0146304f
+PODFILE CHECKSUM: 7df10dc05679c4cbbf17a2232921bcb284d92e5a
 
 COCOAPODS: 1.9.3

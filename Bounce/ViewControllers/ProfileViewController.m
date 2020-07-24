@@ -170,9 +170,19 @@
         TrackCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TrackCell"];
         Track *track = [[Track alloc] initWithDictionary:self.topTracksArray[indexPath.row]];
         cell.trackTitleLabel.text = track.name;
-        cell.trackArtistLabel.text = track.artists[0][@"name"];
+        NSString *artistsList = @"";
+        for (NSDictionary *artist in track.artists) {
+            if(artistsList.length == 0) {
+                artistsList = [artistsList stringByAppendingFormat:@"%@", artist[@"name"]];
+            } else {
+                artistsList = [artistsList stringByAppendingFormat:@", %@", artist[@"name"]];
+            }
+        }
+        cell.trackArtistLabel.text = artistsList;
         NSURL *url = [NSURL URLWithString:track.album.image.url];
         [cell.albumArtView setImageWithURL:url];
+        cell.albumArtView.layer.cornerRadius = 5;
+        cell.albumArtView.clipsToBounds = YES;
         return cell;
     } else { //top artists
         ArtistCell *cell = [tableView dequeueReusableCellWithIdentifier: @"ArtistCell"];

@@ -2,6 +2,7 @@
 #import "ViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import <SpotifyiOS/SpotifyiOS.h>
 
 static NSString * const SpotifyClientID = @"78a164a9d67e4cd4857e69bd9b70b2bb";
 static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
@@ -19,22 +20,39 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
     /*
      This configuration object holds your client ID and redirect URL.
      */
+    [self setConfiguration];
+}
+
++ (instancetype) shared{
+    static dispatch_once_t once;
+    static ViewController *sharedObject = nil;
+    dispatch_once(&once, ^{
+        sharedObject = [[ViewController alloc] init];
+        [sharedObject setConfiguration];
+    });
+    return sharedObject;
+}
+
+- (void)setConfiguration {
     self.sessionManager.delegate = self;
     SPTConfiguration *configuration = [SPTConfiguration configurationWithClientID:SpotifyClientID
                                                                       redirectURL:[NSURL URLWithString:SpotifyRedirectURLString]];
-
     // Set these url's to your backend which contains the secret to exchange for an access token
     // You can use the provided ruby script spotify_token_swap.rb for testing purposes
     configuration.tokenSwapURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/api/token"];
     configuration.tokenRefreshURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/api/refresh_token"];
-
+    //configuration.playURI = @"";
+    self.appRemote = [[SPTAppRemote alloc] initWithConfiguration:configuration logLevel:SPTAppRemoteLogLevelDebug];
+    self.appRemote.delegate = self;
+//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication];
+//    //appDelegate.appRemote = self.appRemote;
+//    [appDelegate setAppRemote:self.appRemote];
     /*
      The session manager lets you authorize, get access tokens, and so on.
      */
     self.sessionManager = [SPTSessionManager sessionManagerWithConfiguration:configuration
                                                                     delegate:self];
 }
-
 #pragma mark - Actions
 
 - (void)didTapAuthButton:(ConnectButton *)sender
@@ -45,7 +63,7 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
      permissions the user is asked to grant.
      For more information, see https://developer.spotify.com/web-api/using-scopes/.
      */
-    SPTScope scope = SPTPlaylistReadPrivateScope | SPTPlaylistModifyPublicScope | SPTPlaylistModifyPrivateScope |SPTUserFollowReadScope | SPTUserFollowModifyScope | SPTUserLibraryReadScope | SPTUserLibraryModifyScope | SPTUserTopReadScope | SPTAppRemoteControlScope | SPTUserReadEmailScope | SPTUserReadPrivateScope | SPTStreamingScope;
+    SPTScope scope = SPTPlaylistReadPrivateScope | SPTPlaylistModifyPublicScope | SPTPlaylistModifyPrivateScope |SPTUserFollowReadScope | SPTUserFollowModifyScope | SPTUserLibraryReadScope | SPTUserLibraryModifyScope | SPTUserTopReadScope | SPTAppRemoteControlScope | SPTUserReadEmailScope | SPTUserReadPrivateScope | SPTStreamingScope | SPTUserModifyPlaybackStateScope;
 
     /*
      Start the authorization process. This requires user input.
@@ -133,5 +151,29 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
         loginVC.accessToken = sender;
     }
 }
+
+- (void)appRemote:(nonnull SPTAppRemote *)appRemote didDisconnectWithError:(nullable NSError *)error {
+    NSLog(@"disconnected");
+}
+
+- (void)appRemote:(nonnull SPTAppRemote *)appRemote didFailConnectionAttemptWithError:(nullable NSError *)error {
+    NSLog(@"Error connecting to Spotify app %@",error);
+}
+
+- (void)appRemoteDidEstablishConnection:(nonnull SPTAppRemote *)appRemote {
+    self.appRemote.playerAPI.delegate = self;
+    [self.appRemote.playerAPI subscribeToPlayerState:^(id  _Nullable result, NSError * _Nullable error) {
+        if(error){
+        NSLog(@"SPTAppRemote player error: %@",error.description);
+        }else{
+            NSLog(@"SPTAppRemote player connected.");
+        }
+    }];
+}
+
+- (void)playerStateDidChange:(nonnull id<SPTAppRemotePlayerState>)playerState {
+     NSLog(@"Track name: %@" , playerState.track.name);
+}
+
 
 @end

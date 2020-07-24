@@ -36,6 +36,7 @@
 		9BE3CC8224C74D3600ED849A /* ArtistCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC8124C74D3600ED849A /* ArtistCell.m */; };
 		9BE3CC8524C75B2500ED849A /* ArtistDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC8424C75B2500ED849A /* ArtistDetailsViewController.m */; };
 		9BE3CC8824C7754E00ED849A /* ArtistDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC8724C7754E00ED849A /* ArtistDetailsCell.m */; };
+		9BE3CC8B24C9EE0800ED849A /* AffinitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE3CC8A24C9EE0800ED849A /* AffinitiesViewController.m */; };
 		EB9F1C8AFE85FAE42309706E /* Pods_Bounce_BounceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */; };
 		FED40600C9347714EEA198C0 /* Pods_BounceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 355A7877EB07D8403483D118 /* Pods_BounceTests.framework */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,8 @@
 		9BE3CC8424C75B2500ED849A /* ArtistDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistDetailsViewController.m; sourceTree = "<group>"; };
 		9BE3CC8624C7754E00ED849A /* ArtistDetailsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArtistDetailsCell.h; sourceTree = "<group>"; };
 		9BE3CC8724C7754E00ED849A /* ArtistDetailsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtistDetailsCell.m; sourceTree = "<group>"; };
+		9BE3CC8924C9EE0800ED849A /* AffinitiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AffinitiesViewController.h; sourceTree = "<group>"; };
+		9BE3CC8A24C9EE0800ED849A /* AffinitiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AffinitiesViewController.m; sourceTree = "<group>"; };
 		A868BA36304F433DD640CC38 /* Pods_Bounce_BounceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bounce_BounceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D93EBBBAED37A29BE63E14 /* Pods-Bounce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bounce.debug.xcconfig"; path = "Target Support Files/Pods-Bounce/Pods-Bounce.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -279,6 +282,8 @@
 				9BE3CC5E24BFB8DC00ED849A /* LoginViewController.m */,
 				9BE3CC8324C75B2500ED849A /* ArtistDetailsViewController.h */,
 				9BE3CC8424C75B2500ED849A /* ArtistDetailsViewController.m */,
+				9BE3CC8924C9EE0800ED849A /* AffinitiesViewController.h */,
+				9BE3CC8A24C9EE0800ED849A /* AffinitiesViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -542,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BCFDA9E24BCEA36009565C4 /* ConnectButton.m in Sources */,
+				9BE3CC8B24C9EE0800ED849A /* AffinitiesViewController.m in Sources */,
 				9BE3CC5C24BF715600ED849A /* TrackDetailsViewController.m in Sources */,
 				9BCFDA5C24BCCE2E009565C4 /* ViewController.m in Sources */,
 				9BE3CC6624C1FB8800ED849A /* Track.m in Sources */,

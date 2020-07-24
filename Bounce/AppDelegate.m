@@ -11,6 +11,8 @@
 #import "SceneDelegate.h"
 #import <Parse/Parse.h>
 
+static NSString * const SpotifyClientID = @"78a164a9d67e4cd4857e69bd9b70b2bb";
+static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
 
 
 @interface AppDelegate ()
@@ -34,14 +36,21 @@
     
     //Parse config
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        
         configuration.applicationId = @"bounce-parse";
         configuration.server = @"http://bounce_parse.herokuapp.com/parse";
     }];
-    
     [Parse initializeWithConfiguration:config];
-    self.appRemote = [[SPTAppRemote alloc] initWithConfiguration:self.configuration logLevel:SPTAppRemoteLogLevelDebug];
-    self.appRemote.delegate = self;
+    
+//    SPTConfiguration *configuration = [SPTConfiguration configurationWithClientID:SpotifyClientID
+//                                                                      redirectURL:[NSURL URLWithString:SpotifyRedirectURLString]];
+//
+//    // Set these url's to your backend which contains the secret to exchange for an access token
+//    // You can use the provided ruby script spotify_token_swap.rb for testing purposes
+//    configuration.tokenSwapURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/api/token"];
+//    configuration.tokenRefreshURL = [NSURL URLWithString: @"https://bounce-spotify.herokuapp.com/api/refresh_token"];
+//
+//    self.appRemote = [[SPTAppRemote alloc] initWithConfiguration:self.configuration logLevel:SPTAppRemoteLogLevelDebug];
+//    self.appRemote.delegate = self;
      return YES;
 }
 - (BOOL)application:(UIApplication *)application

@@ -36,7 +36,6 @@ static NSString * const personalTopTracksRequestBase = @"/v1/me/top/";
 -(instancetype) init{
     self = [super initWithBaseURL:[NSURL URLWithString:baseURL] clientID:spotifyClientID secret:spotifySecretClientID];
     return self;
-
 }
 
 - (void) doGetRequest:(NSString *)request accessToken: (NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{

@@ -8,10 +8,14 @@
 @import AlertTransition;
 #import "TrackDetailsViewController.h"
 #import "SpotifyManager.h"
+#import "ViewController.h"
 #import "AudioFeatures.h"
 #import "Track.h"
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
+#import <SpotifyiOS/SpotifyiOS.h>
+#import "AAChartKit.h"
+
 
 @interface TrackDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *albumView;
@@ -24,9 +28,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *valenceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *acousticLabel;
 @property (weak, nonatomic) IBOutlet UILabel *danceLabel;
+@property (weak, nonatomic) IBOutlet UIView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *energyLabel;
-@property (strong, nonatomic) AppDelegate *delegate;
-
+@property (strong, nonatomic) AudioFeatures *audioFeatures;
 @end
 
 @implementation TrackDetailsViewController
@@ -34,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
 //    [self.delegate.appRemote connect];
 //    [self.delegate.appRemote isConnected];
     
@@ -70,13 +74,14 @@
     UITapGestureRecognizer *energyGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(energyClicked)];
     [self.energyLabel addGestureRecognizer:energyGesture];
     
-//    [self.albumView setUserInteractionEnabled:YES];
-//    UITapGestureRecognizer *playSongGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(albumViewClicked)];
-//    [self.albumView addGestureRecognizer:playSongGesture];
+    [self.albumView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *playSongGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(albumViewClicked)];
+    [self.albumView addGestureRecognizer:playSongGesture];
     
-    
+
     [[SpotifyManager shared] getAudioFeaturesForTrack:self.track.id accessToken:self.accessToken completion:^(NSDictionary * song, NSError * error) {
         AudioFeatures *audioFeatures = [[AudioFeatures alloc] initWithDictionary:song];
+        self.audioFeatures = audioFeatures;
         self.acousticLabel.text = [NSString stringWithFormat:@"%@", audioFeatures.acousticness];
         self.danceLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.danceability];
         self.energyLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.energy];
@@ -85,23 +90,88 @@
         self.tempoLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.tempo];
         self.valenceLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.valence];
         self.timeSigLabel.text = [NSString stringWithFormat:@"%@", audioFeatures.timeSig];
-        self.artistNameLabel.text = self.track.artists[0][@"name"];
+        NSString *artistsList = @"";
+        for (NSDictionary *artist in self.track.artists) {
+            if(artistsList.length == 0) {
+                artistsList = [artistsList stringByAppendingFormat:@"%@", artist[@"name"]];
+            } else {
+                artistsList = [artistsList stringByAppendingFormat:@", %@", artist[@"name"]];
+            }
+        }
+        self.artistNameLabel.text = artistsList;
         self.songNameLabel.text = self.track.name;
         NSURL *url = [NSURL URLWithString:self.track.album.image.url];
         [self.albumView setImageWithURL:url];
+        self.albumView.layer.cornerRadius = 10;
+        self.albumView.clipsToBounds = YES;
+        [self formatAAChart];
     }];
+    
 }
+
+- (void) formatAAChart {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    NSNumber *energy = @([self.audioFeatures.energy doubleValue]/100.0);
+    NSNumber *valence = @([self.audioFeatures.valence doubleValue]/100.0);
+    NSNumber *acousticness = @([self.audioFeatures.acousticness doubleValue]/100.0);
+    NSNumber *danceability = @([self.audioFeatures.danceability doubleValue]/100.0);
+    NSNumber *loudness = @([self.audioFeatures.loudness doubleValue]/100.0);
+    NSNumber *tempo = @([self.audioFeatures.tempo doubleValue]/200.0);
+    
+    CGFloat chartViewWidth  = self.view.frame.size.width;
+    CGFloat chartViewHeight = 433;
+    AAChartView *aaChartView = [[AAChartView alloc] init];
+    aaChartView.frame = CGRectMake(0, 313, chartViewWidth, chartViewHeight);
+    //_aaChartView.scrollEnabled = NO;
+    //// set the content height of aaChartView
+    // _aaChartView.contentHeight = chartViewHeight;
+    [self.scrollView addSubview:aaChartView];
+    [self.scrollView sendSubviewToBack:aaChartView];
+    AASeriesElement *element1 = AASeriesElement.new
+    .dataSet(@[@([self.audioFeatures.energy doubleValue]/100.0),
+               @([self.audioFeatures.valence doubleValue]/100.0),
+               @([self.audioFeatures.acousticness intValue]/100.0),
+               @([self.audioFeatures.danceability doubleValue]/100.0),
+             @([self.audioFeatures.loudness doubleValue]/(-20)),
+             @([self.audioFeatures.tempo doubleValue]/150),
+             @(1),
+               @(1), @(1)])
+    .stepSet(@true);//设置折线样式为直方折线,连接点位置默认靠左👈
+    AAChartModel *aaChartModel = AAChartModel.new
+    .chartTypeSet(AAChartTypeArea)
+    .seriesSet(@[element1]);
+    aaChartModel.yAxisMax = @(1.0);
+    aaChartModel.inverted = YES;
+    aaChartModel.markerRadius = @0;
+    aaChartModel.legendEnabled = NO;
+    aaChartModel.xAxisVisible = NO;
+    aaChartModel.yAxisVisible = NO;
+    aaChartModel.tooltipEnabled = NO;
+    //aaChartModel.colorsTheme = @[@"#ffc069",@"#06caf4",@"#7dffc0"];
+    aaChartModel.animationDuration = @(1200);
+    aaChartView.alpha = 0.3;
+    aaChartModel.dataLabelsEnabled = NO;
+    aaChartModel.borderRadius = 0;
+    aaChartModel.animationType = AAChartAnimationEaseOutCubic;
+
+    aaChartModel.seriesSet(@[element1]);
+    aaChartView.userInteractionEnabled = NO;
+    [aaChartView aa_drawChartWithChartModel:aaChartModel];
+}
+
 - (void) albumViewClicked {
-    [self.delegate.appRemote connect];
+    self.appRemote = [ViewController shared].appRemote;
+    self.appRemote.connectionParameters.accessToken = self.accessToken;
+    [self.appRemote connect];
     NSString *songURI = [@"spotify:track:" stringByAppendingString:self.track.id];
     NSLog(@"Song URI: %@", songURI);
     [self playSong:songURI];
 }
 
 - (void) playSong:(NSString *)songURI {
-    [self.delegate.appRemote connect];
-       
-    [self.delegate.appRemote.playerAPI play:songURI callback:^(id  _Nullable result, NSError * _Nullable error) {
+    self.appRemote.connectionParameters.accessToken = self.accessToken;
+    [self.appRemote connect];
+    [self.appRemote.playerAPI play:songURI callback:^(id  _Nullable result, NSError * _Nullable error) {
             NSLog(@"Playing song.");
        }];
 }

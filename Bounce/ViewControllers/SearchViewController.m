@@ -87,11 +87,21 @@
         TrackCell *cell = [tableView dequeueReusableCellWithIdentifier: @"TrackCell"];
         // *track = self.resultsArray[indexPath.row];
         Track *track = [[Track alloc] initWithDictionary:self.resultsArray[indexPath.row]];
-        cell.trackArtistLabel.text = track.artists[0][@"name"];
+        NSString *artistsList = @"";
+        for (NSDictionary *artist in track.artists) {
+            if(artistsList.length == 0) {
+                artistsList = [artistsList stringByAppendingFormat:@"%@", artist[@"name"]];
+            } else {
+                artistsList = [artistsList stringByAppendingFormat:@", %@", artist[@"name"]];
+            }
+        }
+        cell.trackArtistLabel.text = artistsList;
         cell.trackTitleLabel.text = track.name;
         cell.track = track;
         NSURL *url = [NSURL URLWithString:track.album.image.url];
         [cell.albumArtView setImageWithURL:url];
+        cell.albumArtView.layer.cornerRadius = 5;
+        cell.albumArtView.clipsToBounds = YES;
         return cell;
     } else { //search for artist
         ArtistCell *cell = [tableView dequeueReusableCellWithIdentifier: @"ArtistCell"];
