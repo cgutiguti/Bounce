@@ -55,7 +55,7 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 - [x] artist details screen top tracks table view and related artists table view didn't stay loaded for long (SOLUTION: make arrays have strong attribute)
 - [x] first search button press doesn't update table view
 - [x] remove decimal places of audio features and multiply by 100
-- [ ] time signature audio feature doesn't show up correctly
+- [x] time signature audio feature doesn't show up correctly
 - [x] changing artist/track filter should execute another search
 - [ ] changing profile picture should upload it to Parse server
 - [ ] after logging out once, the login view controller is never called.
