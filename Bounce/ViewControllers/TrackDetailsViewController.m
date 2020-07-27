@@ -15,6 +15,8 @@
 #import "AppDelegate.h"
 #import <SpotifyiOS/SpotifyiOS.h>
 #import "AAChartKit.h"
+#define M_PI   3.14159265358979323846264338327950288   /* pi */
+#define DEGREES_TO_RADIANS(angle) (angle / 180.0 * M_PI)
 
 
 @interface TrackDetailsViewController ()
@@ -30,7 +32,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *danceLabel;
 @property (weak, nonatomic) IBOutlet UIView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *energyLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *recordPlayerView;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (strong, nonatomic) AudioFeatures *audioFeatures;
+@property BOOL albumViewIsRotating;
 @end
 
 @implementation TrackDetailsViewController
@@ -41,43 +46,24 @@
     
 //    [self.delegate.appRemote connect];
 //    [self.delegate.appRemote isConnected];
-    
-    [self.keyLabel setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *keyGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyClicked)];
-    [self.keyLabel addGestureRecognizer:keyGesture];
-    
-    [self.timeSigLabel setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *timeSigGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeSigClicked)];
-    [self.timeSigLabel addGestureRecognizer:timeSigGesture];
-    
-    [self.tempoLabel setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *tempoGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tempoClicked)];
-    [self.tempoLabel addGestureRecognizer:tempoGesture];
-    
-    [self.loudnessLabel setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *loudnessGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loudnessClicked)];
-    [self.loudnessLabel addGestureRecognizer:loudnessGesture];
-    
-    [self.valenceLabel setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *valenceGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valenceClicked)];
-    [self.valenceLabel addGestureRecognizer:valenceGesture];
-    
-    [self.acousticLabel setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *acousticGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(acousticClicked)];
-    [self.acousticLabel addGestureRecognizer:acousticGesture];
-    
-    [self.danceLabel setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *danceGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(danceClicked)];
-    [self.danceLabel addGestureRecognizer:danceGesture];
-    
-    [self.energyLabel setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *energyGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(energyClicked)];
-    [self.energyLabel addGestureRecognizer:energyGesture];
-    
-    [self.albumView setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *playSongGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(albumViewClicked)];
-    [self.albumView addGestureRecognizer:playSongGesture];
-    
+    UITapGestureRecognizer *playSongGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playButtonClicked)];
+    [self.playButton addGestureRecognizer:playSongGesture];
+    UIColor *color = [UIColor colorWithRed:(29.0 / 255.0) green:(185.0 / 255.0) blue:(84.0 / 255.0) alpha:1.0];
+    self.playButton.backgroundColor = color;
+    self.playButton.layer.cornerRadius = self.playButton.frame.size.width/2;
+    self.playButton.clipsToBounds = YES;
+    NSArray<UILabel *> *labelsArray = @[self.keyLabel, self.timeSigLabel, self.tempoLabel, self.loudnessLabel, self.valenceLabel, self.acousticLabel, self.danceLabel, self.energyLabel];
+    SEL selectorArray[] = {@selector(keyClicked), @selector(timeSigClicked), @selector(tempoClicked), @selector(loudnessClicked), @selector(valenceClicked), @selector(acousticClicked), @selector(danceClicked), @selector(energyClicked)};
+    for (int i = 0; i < labelsArray.count; i ++) {
+        UILabel *label = labelsArray[i];
+        SEL selector = selectorArray[i];
+        [label setUserInteractionEnabled:YES];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:selector];
+        [label addGestureRecognizer:gesture];
+    }
+    self.recordPlayerView.hidden = YES;
+    self.recordPlayerView.layer.cornerRadius = self.recordPlayerView.frame.size.width/2;
+    self.recordPlayerView.clipsToBounds = YES;
 
     [[SpotifyManager shared] getAudioFeaturesForTrack:self.track.id accessToken:self.accessToken completion:^(NSDictionary * song, NSError * error) {
         AudioFeatures *audioFeatures = [[AudioFeatures alloc] initWithDictionary:song];
@@ -89,7 +75,7 @@
         self.loudnessLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.loudness];
         self.tempoLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.tempo];
         self.valenceLabel.text = [NSString stringWithFormat:@"%@",audioFeatures.valence];
-        self.timeSigLabel.text = [NSString stringWithFormat:@"%@", audioFeatures.timeSig];
+        self.timeSigLabel.text = [NSString stringWithFormat:@"%@/4", audioFeatures.timeSig];
         NSString *artistsList = @"";
         for (NSDictionary *artist in self.track.artists) {
             if(artistsList.length == 0) {
@@ -110,14 +96,6 @@
 }
 
 - (void) formatAAChart {
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    NSNumber *energy = @([self.audioFeatures.energy doubleValue]/100.0);
-    NSNumber *valence = @([self.audioFeatures.valence doubleValue]/100.0);
-    NSNumber *acousticness = @([self.audioFeatures.acousticness doubleValue]/100.0);
-    NSNumber *danceability = @([self.audioFeatures.danceability doubleValue]/100.0);
-    NSNumber *loudness = @([self.audioFeatures.loudness doubleValue]/100.0);
-    NSNumber *tempo = @([self.audioFeatures.tempo doubleValue]/200.0);
-    
     CGFloat chartViewWidth  = self.view.frame.size.width;
     CGFloat chartViewHeight = 433;
     AAChartView *aaChartView = [[AAChartView alloc] init];
@@ -132,7 +110,7 @@
                @([self.audioFeatures.valence doubleValue]/100.0),
                @([self.audioFeatures.acousticness intValue]/100.0),
                @([self.audioFeatures.danceability doubleValue]/100.0),
-             @([self.audioFeatures.loudness doubleValue]/(-20)),
+               @(pow(2, [self.audioFeatures.loudness doubleValue]/6.0)),
              @([self.audioFeatures.tempo doubleValue]/150),
              @(1),
                @(1), @(1)])
@@ -159,22 +137,80 @@
     [aaChartView aa_drawChartWithChartModel:aaChartModel];
 }
 
-- (void) albumViewClicked {
-    self.appRemote = [ViewController shared].appRemote;
-    self.appRemote.connectionParameters.accessToken = self.accessToken;
-    [self.appRemote connect];
+- (void) playButtonClicked {
+//    self.appRemote = [ViewController shared].appRemote;
+//    self.appRemote.connectionParameters.accessToken = self.accessToken;
+//    [self.appRemote connect];
     NSString *songURI = [@"spotify:track:" stringByAppendingString:self.track.id];
     NSLog(@"Song URI: %@", songURI);
     [self playSong:songURI];
 }
 
 - (void) playSong:(NSString *)songURI {
-    self.appRemote.connectionParameters.accessToken = self.accessToken;
-    [self.appRemote connect];
-    [self.appRemote.playerAPI play:songURI callback:^(id  _Nullable result, NSError * _Nullable error) {
-            NSLog(@"Playing song.");
-       }];
+//    self.appRemote.connectionParameters.accessToken = self.accessToken;
+//    [self.appRemote connect];
+//    [self.appRemote.playerAPI play:songURI callback:^(id  _Nullable result, NSError * _Nullable error) {
+//            NSLog(@"Playing song.");
+//       }];
+    if (self.albumViewIsRotating){
+        self.albumViewIsRotating = NO;
+        [self.playButton setImage:[UIImage systemImageNamed:@"play.fill"] forState:UIControlStateNormal];
+        [self continueRotationAnimation];
+    } else {
+        self.albumView.clipsToBounds = YES;
+        self.albumViewIsRotating = YES;
+        self.recordPlayerView.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
+        self.recordPlayerView.hidden = NO;
+        [self.playButton setImage:[UIImage systemImageNamed:@"pause.fill"] forState:UIControlStateNormal];
+        [self performRotationAnimated];
+    }
 }
+
+- (void)performRotationAnimated {
+        [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                         self.albumView.transform = CGAffineTransformMakeRotation(M_PI);
+                         self.albumView.layer.cornerRadius =  self.albumView.frame.size.width/2;
+            self.recordPlayerView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                         
+                     }
+                     completion:^(BOOL finished){
+        [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                                              self.albumView.transform = CGAffineTransformMakeRotation(0);
+                                          }
+                                          completion:^(BOOL finished){
+            [self continueRotationAnimation];
+                        }];
+            }];
+}
+
+- (void)continueRotationAnimation {
+        [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                         self.albumView.transform = CGAffineTransformMakeRotation(M_PI);
+                     }
+                     completion:^(BOOL finished){
+            if (self.albumViewIsRotating) {
+                [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                                      self.albumView.transform = CGAffineTransformMakeRotation(0);
+                                  }
+                                  completion:^(BOOL finished){
+                    [self continueRotationAnimation];
+                }];
+            } else {
+                [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+                                      self.albumView.transform = CGAffineTransformMakeRotation(0);
+                                      self.albumView.layer.cornerRadius =  10;
+                    self.recordPlayerView.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
+                                  }
+                                  completion:^(BOOL finished){
+                    [self.albumView stopAnimating];
+                    self.recordPlayerView.hidden = YES;
+                }];
+            }
+        
+            }];
+}
+
+
 - (void) keyClicked{
     [self presentAlertControllerWithTitle:@"Musical Key"
                                   message:@"The key the track is in. Integers map to pitches using standard Pitch Class notation. E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on."

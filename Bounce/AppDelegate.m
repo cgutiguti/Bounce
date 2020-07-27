@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "SceneDelegate.h"
+#import "LoginViewController.h"
 #import <Parse/Parse.h>
 
 static NSString * const SpotifyClientID = @"78a164a9d67e4cd4857e69bd9b70b2bb";
@@ -30,8 +31,15 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
      self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
      self.window.rootViewController = [ViewController new];
      self.rootViewController = [ViewController new];
+    
+    //self.window.rootViewController = [LoginViewController new];
+    // self.rootViewController = [LoginViewController new];
+    
+    
      self.window.rootViewController = self.rootViewController;
      [self.window makeKeyAndVisible];
+    
+    
     
     
     //Parse config

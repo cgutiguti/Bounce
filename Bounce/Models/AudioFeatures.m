@@ -25,7 +25,7 @@
     self.speechiness = [NSString stringWithFormat:@"%d", (int)([dictionary[@"speechiness"] doubleValue]*100)];
     self.tempo = [NSString stringWithFormat:@"%d", (int)[dictionary[@"tempo"] doubleValue]];
     self.valence = [NSString stringWithFormat:@"%d", (int)([dictionary[@"valence"] doubleValue]*100)];
-    self.timeSig = dictionary[@"timeSig"];
+    self.timeSig = dictionary[@"time_signature"];
     
     return self;
 }

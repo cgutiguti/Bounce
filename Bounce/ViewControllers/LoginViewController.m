@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
 #import "SearchViewController.h"
+#import "AffinitiesViewController.h"
 #import "ProfileViewController.h"
 
 
@@ -105,18 +106,25 @@
         UITabBarController* tbc = [segue destinationViewController];
         SearchViewController* searchVC = [[SearchViewController alloc] init];
         ProfileViewController *profileVC = [[ProfileViewController alloc] init];
+        AffinitiesViewController *affinitiesVC = [[AffinitiesViewController alloc] init];
         
         UINavigationController *searchNav = [[UINavigationController alloc] init];
         UINavigationController *profileNav = [[UINavigationController alloc] init];
+        UINavigationController *affinitiesNav = [[UINavigationController alloc] init];
         
+        affinitiesNav = (UINavigationController *)[[tbc customizableViewControllers] objectAtIndex:0];
         searchNav = (UINavigationController *)[[tbc customizableViewControllers] objectAtIndex:1];
         profileNav = (UINavigationController *)[[tbc customizableViewControllers] objectAtIndex:2];
         
         searchVC = (SearchViewController *)[searchNav topViewController];
         profileVC = (ProfileViewController *)[profileNav topViewController];
+        affinitiesVC = (AffinitiesViewController *)[affinitiesNav topViewController];
         
         searchVC.accessToken = self.accessToken;
         profileVC.accessToken = self.accessToken;
+        affinitiesVC.accessToken = self.accessToken;
+        
+        tbc.selectedIndex = 1;
        }
 }
 

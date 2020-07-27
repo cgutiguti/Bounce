@@ -19,12 +19,14 @@ static NSString * const searchRequestBase = @"/v1/search?q=";
 static NSString * const audioFeaturesRequestBase = @"/v1/audio-features/";
 static NSString * const artistTopTracksRequestBase = @"/v1/artists/";
 static NSString * const personalTopTracksRequestBase = @"/v1/me/top/";
+static NSString * const personalPlaylistsRequestBase = @"/v1/me/playlists?limit=50";
+static NSString * const personalSavedTracksRequestBase = @"/v1/me/tracks?limit=50";
 
 
 
 @implementation SpotifyManager
 
-+ (instancetype) shared{
++ (instancetype)shared{
     static dispatch_once_t once;
     static SpotifyManager *sharedObject = nil;
     dispatch_once(&once, ^{
@@ -33,12 +35,12 @@ static NSString * const personalTopTracksRequestBase = @"/v1/me/top/";
     return sharedObject;
 }
 
--(instancetype) init{
+- (instancetype)init{
     self = [super initWithBaseURL:[NSURL URLWithString:baseURL] clientID:spotifyClientID secret:spotifySecretClientID];
     return self;
 }
 
-- (void) doGetRequest:(NSString *)request accessToken: (NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+- (void)doGetRequest:(NSString *)request accessToken: (NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     self.requestSerializer = [AFHTTPRequestSerializer serializer];
     [self.requestSerializer setValue:[NSString stringWithFormat:@"Bearer  %@",token] forHTTPHeaderField:@"Authorization"];
     [self GET:request
@@ -54,55 +56,77 @@ static NSString * const personalTopTracksRequestBase = @"/v1/me/top/";
         completion(nil,error);
     }];
 }
-- (void) getSong:(NSString *)songURI accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+
+- (void)getSong:(NSString *)songURI accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     NSString *request = [trackRequestBase stringByAppendingString:songURI];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];
-    
 }
-- (void) searchForSong:(NSString *)songQueryURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+
+- (void)getSeveralArtists:(NSString *)artistIDs accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = [[artistTopTracksRequestBase stringByAppendingString:@"?ids="] stringByAppendingString:artistIDs];
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
+    }];
+}
+
+- (void)searchForSong:(NSString *)songQueryURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     NSString *request = [[searchRequestBase stringByAppendingString:songQueryURI] stringByAppendingString:@"&type=track"];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];
 }
- - (void) searchForArtist:(NSString *)songQueryURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+
+ - (void)searchForArtist:(NSString *)songQueryURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
      NSString *request = [[searchRequestBase stringByAppendingString:songQueryURI] stringByAppendingString:@"&type=artist"];
      [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
          completion(dict, error);
      }];
  }
 
-- (void) getAudioFeaturesForTrack:(NSString *)songURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+- (void)getAudioFeaturesForTrack:(NSString *)songURI  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     NSString *request = [audioFeaturesRequestBase stringByAppendingString:songURI];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];
 }
-- (void) getArtistTopTracks:(NSString *)artistID  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+- (void)getArtistTopTracks:(NSString *)artistID  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     NSString *request = [[artistTopTracksRequestBase stringByAppendingString:artistID] stringByAppendingString:@"/top-tracks?country=from_token"];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];
 }
 
-- (void) getRelatedArtists:(NSString *)artistID  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+- (void)getRelatedArtists:(NSString *)artistID  accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     NSString *request = [[artistTopTracksRequestBase stringByAppendingString:artistID] stringByAppendingString:@"/related-artists"];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];
 }
 
-- (void) getPersonalTopTracks:(NSString *)time_range accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+- (void)getPersonalTopTracks:(NSString *)time_range accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     NSString *request = [[personalTopTracksRequestBase stringByAppendingString:@"tracks"] stringByAppendingString:time_range];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];
 }
 
-- (void) getPersonalTopArtists:(NSString *)time_range accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+- (void)getPersonalTopArtists:(NSString *)time_range accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
     NSString *request = [[personalTopTracksRequestBase stringByAppendingString:@"artists"] stringByAppendingString:time_range];
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
+    }];
+}
+
+- (void)getPersonalPlayLists:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = personalPlaylistsRequestBase;
+    [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
+        completion(dict, error);
+    }];
+}
+- (void)getPersonalSavedTracks:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
+    NSString *request = personalSavedTracksRequestBase;
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];

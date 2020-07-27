@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AffinitiesViewController : UIViewController
-
+@property (nonatomic, strong) NSString *accessToken;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,7 @@
 
 #import "SceneDelegate.h"
 #import "ViewController.h"
+#import "LoginViewController.h"
 
 
 
@@ -33,23 +34,18 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-//    NSSet *c = connectionOptions.URLContexts;
-//    if(c && [c count] > 0)
-//    {
-//        NSURL *url = ((UIOpenURLContext*)[[c allObjects] firstObject]).URL;
-//        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
-//    }
+
     self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
- //   self.window.rootViewController = [[ViewController alloc] init];
+    self.window.rootViewController = [[ViewController alloc] init];
     [self.window makeKeyAndVisible];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ViewController *spotifyVC = [storyboard instantiateViewControllerWithIdentifier:@"spotifyVC"];
+   ViewController *spotifyVC = [storyboard instantiateViewControllerWithIdentifier:@"spotifyVC"];
+  //  LoginViewController *spotifyVC = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    
     self.window.rootViewController = spotifyVC;
     self.spotifyVC = spotifyVC;
     
 }
-
-
 
 - (void)sceneDidDisconnect:(UIScene *)scene {
     // Called as the scene is being released by the system.

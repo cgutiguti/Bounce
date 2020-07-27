@@ -12,6 +12,7 @@
 #import "ViewController.h"
 #import "TrackDetailsViewController.h"
 #import "ArtistDetailsViewController.h"
+#import "LoginViewController.h"
 #import "TrackCell.h"
 #import "ArtistCell.h"
 #import "Track.h"
@@ -101,7 +102,7 @@
 - (IBAction)didTapLogout:(id)sender {
     SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"spotifyVC"];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
     myDelegate.window.rootViewController = loginViewController;
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error) {

@@ -7,16 +7,83 @@
 //
 
 #import "AffinitiesViewController.h"
+#import "SpotifyManager.h"
 #import "AAChartKit.h"
+#import "Track.h"
+#import "Artist.h"
 
 @interface AffinitiesViewController ()
-
+@property (nonatomic, strong) NSMutableArray *tracksData;
+@property (nonatomic, strong) NSMutableArray *genresData;
+@property (nonatomic, strong) NSMutableArray *artistsData;
 @end
 
 @implementation AffinitiesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self fetchPlaylistData];
+}
+
+- (void)fetchPlaylistData {
+    [[SpotifyManager shared] getPersonalPlayLists:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
+        NSArray *data = dictionary[@"items"];
+        for (NSDictionary *playlist in data) {
+            NSString *href = [playlist[@"tracks"][@"href"] substringFromIndex:23];
+            [[SpotifyManager shared] doGetRequest:href accessToken:self.accessToken completion:^(NSDictionary * trackList, NSError * error) {
+                for (NSDictionary *trackData in trackList[@"items"]){
+                    Track *track = [[Track alloc] initWithDictionary:trackData[@"track"]];
+                    [self.tracksData addObject:track];
+                }
+                [self fetchGenresFromTracks];
+            }];
+        }
+    }];
+}
+
+- (void)fetchGenresFromTracks {
+    /* Spotify API GET several artists endpoint accepts a maximum of 50 ids.
+       Below, we batch the ids from self.artistsData in groups of 50 and send requests.
+       From the request response, add artist objects to self.artistsData. */
+    NSString *artistIDs = @"";
+    int i = 0;
+    while (i < self.tracksData.count) {
+        //if we have reached request maximum (50), then send the request and reset the request string of IDs to an empty string.
+        if (i % 50 == 0) {
+            //do request
+            [[SpotifyManager shared] getSeveralArtists:artistIDs accessToken:self.accessToken completion:^(NSDictionary * artistArray, NSError * error) {
+                for (NSDictionary *artistDict in artistArray){
+                    Artist *artist = [[Artist alloc] initWithDictionary:artistDict];
+                    [self.artistsData addObject:artist];
+                }
+            }];
+            //make request string empty again
+            artistIDs = @"";
+        }
+        //add another id to the end of request string
+        Track *track = self.tracksData[i];
+        NSDictionary *artistFromTrack = track.artists[0];
+        //IDs are in the form of a comma separated list
+        artistIDs = [[artistIDs stringByAppendingString:@","] stringByAppendingString:artistFromTrack[@"id"]]; //IDs are in the form of a comma separated list
+        i++; //increment count.
+    }
+    //After we have reached the end of self.tracksData, make one last request for remaining artists if we have not already
+    [[SpotifyManager shared] getSeveralArtists:artistIDs accessToken:self.accessToken completion:^(NSDictionary * artistArray, NSError * error) {
+        for (NSDictionary *artistDict in artistArray){
+            Artist *artist = [[Artist alloc] initWithDictionary:artistDict];
+            [self.artistsData addObject:artist];
+        }
+    }];
+    //For each artist object in self.artistsData, add all genres from artist.genres array to self.genresData.
+    for (Artist *artist in self.artistsData) {
+        for (NSString *genre in artist.genres) {
+            [self.genresData addObject:genre];
+        }
+    }
+    NSLog(@"Finished gathering and sorting data.");
+}
+
+- (void)setUpChartView {
     AASeriesElement *element = AASeriesElement.new
     .nameSet(@"语言热度值")
     .innerSizeSet(@"20%")//内部圆环半径大小占比
@@ -56,7 +123,6 @@
     [self.view addSubview:aaChartView];
     [aaChartView aa_drawChartWithChartModel:aaChartModel];
 }
-
 /*
 #pragma mark - Navigation
 
