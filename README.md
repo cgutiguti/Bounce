@@ -24,7 +24,6 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
  - [x] Set up models and API endpoints GET functions
   * - [x] track
   * - [x] artist
-  * - [ ] playlist
   * - [x] album
  - [x] Set up skeleton navigational views
  - [x] Set up account creation and linking with Spotify. 
@@ -48,9 +47,9 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
  - [x] change profile image from profile tab
  - [x] implement logout button
 ### Week 4
- - [ ] animations
+ - [x] animations
  - [ ] image assets and design
- - [ ] Auto Layout
+ - [x] Auto Layout
 ### Bugs that need to be fixed
 - [x] artist details screen top tracks table view and related artists table view didn't stay loaded for long (SOLUTION: make arrays have strong attribute)
 - [x] first search button press doesn't update table view
@@ -58,7 +57,7 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 - [x] time signature audio feature doesn't show up correctly
 - [x] changing artist/track filter should execute another search
 - [ ] changing profile picture should upload it to Parse server
-- [ ] after logging out once, the login view controller is never called.
+- [x] after logging out once, the login view controller is never called. (SOLUTION: log out button now redirects to login view controller.)
 - [ ] logging in on the login view controller does not work. (connection to daemon was invalidated)
 ## Product Spec
 
