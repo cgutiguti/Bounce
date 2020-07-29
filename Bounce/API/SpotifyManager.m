@@ -8,12 +8,16 @@
 #import "SpotifyManager.h"
 #import "AppDelegate.h"
 
+//initialization parameters
 static NSString * const spotifyClientID = @"78a164a9d67e4cd4857e69bd9b70b2bb";
 static NSString * const spotifySecretClientID = @"40d1fedad22842f7acc8728a05e36230";
 static NSString * const spotifyRedirectURLString = @"bounce-spotify://callback";
+//token swap parameters
 static NSString * const tokenSwapURLString = @"https://bounce-spotify.herokuapp.com/api/token";
 static NSString * const tokenRefreshURLString = @"https://bounce-spotify.herokuapp.com/api/refresh_token";
+//base URL
 static NSString * const baseURL =@"https://api.spotify.com";
+//URL addons
 static NSString * const trackRequestBase = @"/v1/tracks/";
 static NSString * const searchRequestBase = @"/v1/search?q=";
 static NSString * const audioFeaturesRequestBase = @"/v1/audio-features/";
@@ -65,7 +69,7 @@ static NSString * const personalSavedTracksRequestBase = @"/v1/me/tracks?limit=5
 }
 
 - (void)getSeveralArtists:(NSString *)artistIDs accessToken:(NSString *)token completion:(void (^)(NSDictionary * , NSError * ))completion{
-    NSString *request = [[artistTopTracksRequestBase stringByAppendingString:@"?ids="] stringByAppendingString:artistIDs];
+    NSString *request = [[@"/v1/artists" stringByAppendingString:@"?ids="] stringByAppendingString:artistIDs];
     [self doGetRequest:request accessToken:token completion:^(NSDictionary *dict, NSError *error) {
         completion(dict, error);
     }];

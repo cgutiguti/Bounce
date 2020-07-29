@@ -6,20 +6,25 @@
 //  Copyright © 2020 Carmen Gutierrez. All rights reserved.
 //
 @import AlertTransition;
+//view controllers
 #import "TrackDetailsViewController.h"
-#import "SpotifyManager.h"
 #import "ViewController.h"
+//models
 #import "AudioFeatures.h"
 #import "Track.h"
+//outside functions
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
+#import "SpotifyManager.h"
 #import <SpotifyiOS/SpotifyiOS.h>
 #import "AAChartKit.h"
+//album rotation animation parameters
 #define M_PI   3.14159265358979323846264338327950288   /* pi */
 #define DEGREES_TO_RADIANS(angle) (angle / 180.0 * M_PI)
 
 
 @interface TrackDetailsViewController ()
+//storyboard outlets
 @property (weak, nonatomic) IBOutlet UIImageView *albumView;
 @property (weak, nonatomic) IBOutlet UILabel *songNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
@@ -34,7 +39,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *energyLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *recordPlayerView;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+//data
 @property (strong, nonatomic) AudioFeatures *audioFeatures;
+//personal state booleans
 @property BOOL albumViewIsRotating;
 @end
 
@@ -42,8 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    // Set up play button for playing song.
 //    [self.delegate.appRemote connect];
 //    [self.delegate.appRemote isConnected];
     UITapGestureRecognizer *playSongGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playButtonClicked)];
@@ -52,6 +58,7 @@
     self.playButton.backgroundColor = color;
     self.playButton.layer.cornerRadius = self.playButton.frame.size.width/2;
     self.playButton.clipsToBounds = YES;
+    //For each audio feature, make tapping on it bring up informational panel describing the feature.
     NSArray<UILabel *> *labelsArray = @[self.keyLabel, self.timeSigLabel, self.tempoLabel, self.loudnessLabel, self.valenceLabel, self.acousticLabel, self.danceLabel, self.energyLabel];
     SEL selectorArray[] = {@selector(keyClicked), @selector(timeSigClicked), @selector(tempoClicked), @selector(loudnessClicked), @selector(valenceClicked), @selector(acousticClicked), @selector(danceClicked), @selector(energyClicked)};
     for (int i = 0; i < labelsArray.count; i ++) {
@@ -61,10 +68,11 @@
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:selector];
         [label addGestureRecognizer:gesture];
     }
+    // Record Player View is the circle in the middle of the album that appears when the "record" is playing.
     self.recordPlayerView.hidden = YES;
     self.recordPlayerView.layer.cornerRadius = self.recordPlayerView.frame.size.width/2;
     self.recordPlayerView.clipsToBounds = YES;
-
+    // Set up audio features data from request
     [[SpotifyManager shared] getAudioFeaturesForTrack:self.track.id accessToken:self.accessToken completion:^(NSDictionary * song, NSError * error) {
         AudioFeatures *audioFeatures = [[AudioFeatures alloc] initWithDictionary:song];
         self.audioFeatures = audioFeatures;
@@ -86,6 +94,7 @@
         }
         self.artistNameLabel.text = artistsList;
         self.songNameLabel.text = self.track.name;
+        // Make album view have rounded edges
         NSURL *url = [NSURL URLWithString:self.track.album.image.url];
         [self.albumView setImageWithURL:url];
         self.albumView.layer.cornerRadius = 10;
@@ -114,7 +123,7 @@
              @([self.audioFeatures.tempo doubleValue]/150),
              @(1),
                @(1), @(1)])
-    .stepSet(@true);//设置折线样式为直方折线,连接点位置默认靠左👈
+    .stepSet(@true);
     AAChartModel *aaChartModel = AAChartModel.new
     .chartTypeSet(AAChartTypeArea)
     .seriesSet(@[element1]);
@@ -206,7 +215,6 @@
                     self.recordPlayerView.hidden = YES;
                 }];
             }
-        
             }];
 }
 

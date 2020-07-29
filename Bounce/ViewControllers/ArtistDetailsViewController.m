@@ -6,19 +6,25 @@
 //  Copyright © 2020 Carmen Gutierrez. All rights reserved.
 //
 
+//view controllers
 #import "ArtistDetailsViewController.h"
 #import "TrackDetailsViewController.h"
+//cell models
 #import "ArtistDetailsCell.h"
 #import "ArtistCell.h"
 #import "TrackCell.h"
+//models
 #import "Artist.h"
 #import "Track.h"
+//outside functions
 #import "UIImageView+AFNetworking.h"
 #import "SpotifyManager.h"
 
 
 @interface ArtistDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
+//storyboard outlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+//data
 @property (strong, nonatomic) NSArray *topTracksArray;
 @property (strong, nonatomic) NSArray *relatedArtistsArray;
 @end

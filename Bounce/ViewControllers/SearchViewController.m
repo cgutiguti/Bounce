@@ -6,23 +6,34 @@
 //  Copyright © 2020 Carmen Gutierrez. All rights reserved.
 //
 
+//view controllers
 #import "SearchViewController.h"
-#import "TrackCell.h"
-#import "ArtistCell.h"
-#import "AppDelegate.h"
-#import "SpotifyManager.h"
-#import "Track.h"
-#import "Artist.h"
-#import "UIImageView+AFNetworking.h"
 #import "TrackDetailsViewController.h"
 #import "ArtistDetailsViewController.h"
+#import "AffinitiesViewController.h"
+//model cells
+#import "TrackCell.h"
+#import "ArtistCell.h"
+//outside functions
+#import "AppDelegate.h"
+#import "SpotifyManager.h"
+#import "UIImageView+AFNetworking.h"
+//models
+#import "Track.h"
+#import "Artist.h"
+
+
 
 
 @interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+//storyboard outlets
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *typeControl;
+//data
+
 @property NSArray *resultsArray;
+//personal booleans for state of search
 @property BOOL completedSearchForTrack;
 
 
@@ -39,6 +50,7 @@
     self.searchBar.showsSearchResultsButton = NO;
     [self.typeControl addTarget:self action:@selector(doSearchUsingManager) forControlEvents:UIControlEventValueChanged];
 }
+
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 
@@ -85,11 +97,11 @@
   
     if (self.completedSearchForTrack) {//search for song
         TrackCell *cell = [tableView dequeueReusableCellWithIdentifier: @"TrackCell"];
-        // *track = self.resultsArray[indexPath.row];
         Track *track = [[Track alloc] initWithDictionary:self.resultsArray[indexPath.row]];
         NSString *artistsList = @"";
+        //loop over list of artists of track, then append them together using commas
         for (NSDictionary *artist in track.artists) {
-            if(artistsList.length == 0) {
+            if(artistsList.length == 0) { //if this is the first artist we are adding, don't add a , before its name
                 artistsList = [artistsList stringByAppendingFormat:@"%@", artist[@"name"]];
             } else {
                 artistsList = [artistsList stringByAppendingFormat:@", %@", artist[@"name"]];

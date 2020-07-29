@@ -6,110 +6,112 @@
 //  Copyright © 2020 Carmen Gutierrez. All rights reserved.
 //
 
+//outside functions
 #import "AffinitiesViewController.h"
 #import "SpotifyManager.h"
 #import "AAChartKit.h"
+//models
 #import "Track.h"
 #import "Artist.h"
 
 @interface AffinitiesViewController ()
-@property (nonatomic, strong) NSMutableArray *tracksData;
-@property (nonatomic, strong) NSMutableArray *genresData;
-@property (nonatomic, strong) NSMutableArray *artistsData;
+//data
+@property (nonatomic, strong) NSMutableArray *dataSet;
+@property (nonatomic, strong) NSMutableDictionary *dataDictionary;
+@property int numBatchesCompleted;
+@property int numBatchesExpected;
+
+
 @end
 
 @implementation AffinitiesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self fetchPlaylistData];
+    self.artistsData = [[NSMutableArray alloc] init];
+    self.genresData = [[NSMutableArray alloc] init];
+    self.dataSet =[[NSMutableArray alloc] init];
+    self.dataDictionary = [[NSMutableDictionary alloc] init];
+    self.numBatchesCompleted = 0;
+  
+    self.tracksData = [self.tracksData subarrayWithRange:NSMakeRange(30, 30)];
+    [self getArtistsFromTracks];
+    [self batchArtists];
+//    [self createDataDict];
+    
 }
 
-- (void)fetchPlaylistData {
-    [[SpotifyManager shared] getPersonalPlayLists:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
-        NSArray *data = dictionary[@"items"];
-        for (NSDictionary *playlist in data) {
-            NSString *href = [playlist[@"tracks"][@"href"] substringFromIndex:23];
-            [[SpotifyManager shared] doGetRequest:href accessToken:self.accessToken completion:^(NSDictionary * trackList, NSError * error) {
-                for (NSDictionary *trackData in trackList[@"items"]){
-                    Track *track = [[Track alloc] initWithDictionary:trackData[@"track"]];
-                    [self.tracksData addObject:track];
-                }
-                [self fetchGenresFromTracks];
-            }];
-        }
-    }];
+- (void)getArtistsFromTracks {
+    for (NSDictionary *track in self.tracksData) {
+        NSString *artistID = track[@"track"][@"artists"][0][@"id"];
+        [self.artistsData addObject:artistID];
+    }
 }
 
-- (void)fetchGenresFromTracks {
-    /* Spotify API GET several artists endpoint accepts a maximum of 50 ids.
-       Below, we batch the ids from self.artistsData in groups of 50 and send requests.
-       From the request response, add artist objects to self.artistsData. */
-    NSString *artistIDs = @"";
+- (void)batchArtists {
     int i = 0;
-    while (i < self.tracksData.count) {
-        //if we have reached request maximum (50), then send the request and reset the request string of IDs to an empty string.
-        if (i % 50 == 0) {
-            //do request
-            [[SpotifyManager shared] getSeveralArtists:artistIDs accessToken:self.accessToken completion:^(NSDictionary * artistArray, NSError * error) {
-                for (NSDictionary *artistDict in artistArray){
-                    Artist *artist = [[Artist alloc] initWithDictionary:artistDict];
-                    [self.artistsData addObject:artist];
-                }
-            }];
-            //make request string empty again
-            artistIDs = @"";
-        }
-        //add another id to the end of request string
-        Track *track = self.tracksData[i];
-        NSDictionary *artistFromTrack = track.artists[0];
-        //IDs are in the form of a comma separated list
-        artistIDs = [[artistIDs stringByAppendingString:@","] stringByAppendingString:artistFromTrack[@"id"]]; //IDs are in the form of a comma separated list
-        i++; //increment count.
+    int range = 25;
+    self.numBatchesExpected = self.artistsData.count/range;
+    while (i + range < self.artistsData.count) {
+        NSArray<NSString *> *artistBatch = [self.artistsData subarrayWithRange:NSMakeRange(i, range)];
+        [self fetchBatchedArtists:artistBatch];
+        i += range;
     }
-    //After we have reached the end of self.tracksData, make one last request for remaining artists if we have not already
-    [[SpotifyManager shared] getSeveralArtists:artistIDs accessToken:self.accessToken completion:^(NSDictionary * artistArray, NSError * error) {
-        for (NSDictionary *artistDict in artistArray){
-            Artist *artist = [[Artist alloc] initWithDictionary:artistDict];
-            [self.artistsData addObject:artist];
+}
+
+- (void)fetchBatchedArtists:(NSArray<NSString *> *)artistBatch {
+    NSString *artistIDList = @"";
+    for (NSString *artistID in artistBatch) {
+        artistIDList = [[artistIDList stringByAppendingString:@","] stringByAppendingString:artistID];
+    }
+    [[SpotifyManager shared] getSeveralArtists:[artistIDList substringFromIndex:1] accessToken:self.accessToken completion:^(NSDictionary * artistArray, NSError * error) {
+        if (artistArray) {
+            for (NSDictionary *artist in artistArray[@"artists"]) {
+                NSArray *genres = artist[@"genres"];
+                [self.genresData addObjectsFromArray:genres];
+                for (NSString *genre in genres) {
+                    if ([self.dataDictionary objectForKey:genre] == nil) { //if there isn't yet a key, create a key with value 1.
+                        [self.dataDictionary setValue:@1 forKey:genre];
+                    } else { // if there is already a key, add 1 to its value.
+                        int value = [[self.dataDictionary valueForKey:genre] intValue];;
+                        [self.dataDictionary setValue:@(value+1) forKey:genre];
+                    }
+                }
+            }
+            self.numBatchesCompleted ++;
+            [self createDataDict];
         }
     }];
-    //For each artist object in self.artistsData, add all genres from artist.genres array to self.genresData.
-    for (Artist *artist in self.artistsData) {
-        for (NSString *genre in artist.genres) {
-            [self.genresData addObject:genre];
+}
+
+- (void)createDataDict {
+    if (self.numBatchesCompleted == self.numBatchesExpected){
+        //create an array out of the dictionary
+        NSArray *keys = [self.dataDictionary allKeys];
+        for (NSString *key in keys) {
+            [self.dataSet addObject:@[key, [self.dataDictionary objectForKey:key]]];
         }
+        [self setUpChartView];
     }
-    NSLog(@"Finished gathering and sorting data.");
 }
 
 - (void)setUpChartView {
     AASeriesElement *element = AASeriesElement.new
-    .nameSet(@"语言热度值")
-    .innerSizeSet(@"20%")//内部圆环半径大小占比
-    .sizeSet(@200)//尺寸大小
-    .borderWidthSet(@0)//描边的宽度
-    .allowPointSelectSet(true)//是否允许在点击数据点标记(扇形图点击选中的块发生位移)
+    .nameSet(@"Number of Tracks")
+    .innerSizeSet(@"0%")
+    .sizeSet(@200)
+    .borderWidthSet(@0)
+    .allowPointSelectSet(true)
     .statesSet(AAStates.new
                .hoverSet(AAHover.new
-                         .enabledSet(false)//禁用点击区块之后出现的半透明遮罩层
+                         .enabledSet(false)
                          ))
-    .dataSet(@[
-        @[@"Firefox",   @3336.2],
-        @[@"IE",          @26.8],
-        @{@"sliced": @true,
-          @"selected": @true,
-          @"name": @"Chrome",
-          @"y": @666.8,        },
-        @[@"Safari",      @88.5],
-        @[@"Opera",       @46.0],
-        @[@"Others",     @223.0],
-    ]);
+    .dataSet(self.dataSet);
     AAChartModel *aaChartModel = AAChartModel.new
     .chartTypeSet(AAChartTypePie)
     .colorsThemeSet(@[@"#0c9674",@"#7dffc0",@"#ff3333",@"#facd32",@"#ffffa0",@"#EA007B"])
-    .dataLabelsEnabledSet(true)//是否直接显示扇形图数据
-    .yAxisTitleSet(@"摄氏度")
+    .dataLabelsEnabledSet(true)
+    .yAxisTitleSet(@"Title")
     .seriesSet(@[element]);
 
     // Do any additional setup after loading the view.

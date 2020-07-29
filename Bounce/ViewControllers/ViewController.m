@@ -1,9 +1,14 @@
+
+//view models
 #import "ConnectView.h"
+//view controllers
 #import "ViewController.h"
 #import "LoginViewController.h"
+//outside functions
 #import "AppDelegate.h"
 #import <SpotifyiOS/SpotifyiOS.h>
 
+//Spotify API connection parameters
 static NSString * const SpotifyClientID = @"78a164a9d67e4cd4857e69bd9b70b2bb";
 static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
 
@@ -23,6 +28,7 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
     [self setConfiguration];
 }
 
+/* View controller must be shared so that other views can access the song player app remote that is initialized here. */
 + (instancetype) shared{
     static dispatch_once_t once;
     static ViewController *sharedObject = nil;
@@ -44,12 +50,8 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
     //configuration.playURI = @"";
     self.appRemote = [[SPTAppRemote alloc] initWithConfiguration:configuration logLevel:SPTAppRemoteLogLevelDebug];
     self.appRemote.delegate = self;
-//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication];
-//    //appDelegate.appRemote = self.appRemote;
-//    [appDelegate setAppRemote:self.appRemote];
-    /*
-     The session manager lets you authorize, get access tokens, and so on.
-     */
+
+    /*  The session manager lets you authorize, get access tokens, and so on.  */
     self.sessionManager = [SPTSessionManager sessionManagerWithConfiguration:configuration
                                                                     delegate:self];
 }
@@ -81,21 +83,11 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
 
 - (void)sessionManager:(SPTSessionManager *)manager didInitiateSession:(SPTSession *)session
 {
-//    [self presentAlertControllerWithTitle:@"Authorization Succeeded"
-//                                  message:session.description
-//                              buttonTitle:@"Nice"];
-//    dispatch_async(dispatch_get_main_queue(), ^{ //this function calls the inner code block using the main thread instead of the background thread.
-//        LoginViewController *loginVC = [[LoginViewController alloc] init];
-////        [self presentViewController:loginVC animated:YES completion:nil];
-//        [self presentModalViewController:loginVC animated:YES];
-////        [self performSegueWithIdentifier:@"connectSegue" sender:nil];
-//    });
     if (session) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"connectToLoginSegue" sender:session.accessToken];
         });
     }
-    
 }
 
 - (void)sessionManager:(SPTSessionManager *)manager didFailWithError:(NSError *)error

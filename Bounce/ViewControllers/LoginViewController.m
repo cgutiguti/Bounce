@@ -6,21 +6,29 @@
 //  Copyright © 2020 Carmen Gutierrez. All rights reserved.
 //
 
+//view controllers
 #import "LoginViewController.h"
-#import <Parse/Parse.h>
 #import "SearchViewController.h"
 #import "AffinitiesViewController.h"
 #import "ProfileViewController.h"
+//outside functions
+#import "SpotifyManager.h"
+#import <Parse/Parse.h>
+//models
+#import "Track.h"
 
 
 
 
 @interface LoginViewController ()
+//storyboard outlets
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *signupButton;
 @property (weak, nonatomic) IBOutlet UIButton *skipButton;
+//data
+@property (strong, nonatomic) NSMutableArray *tracksData;
 
 @end
 
@@ -28,18 +36,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self fetchPlaylistData];
+    // Set up green round buttons formatting
     UIColor *color = [UIColor colorWithRed:(29.0 / 255.0) green:(185.0 / 255.0) blue:(84.0 / 255.0) alpha:1.0];
     self.loginButton.backgroundColor = color;
-//    self.loginButton.contentEdgeInsets = UIEdgeInsetsMake(11.75, 32.0, 11.75, 32.0);
     self.loginButton.layer.cornerRadius = 20.0;
-    
     self.signupButton.backgroundColor = color;
-//    self.signupButton.contentEdgeInsets = UIEdgeInsetsMake(11.75, 32.0, 11.75, 32.0);
     self.signupButton.layer.cornerRadius = 20.0;
     self.skipButton.backgroundColor = color;
     self.skipButton.layer.cornerRadius = 20.0;
 }
+
+- (void)fetchPlaylistData {
+    self.tracksData = [[NSMutableArray alloc] init];
+    [[SpotifyManager shared] getPersonalPlayLists:self.accessToken completion:^(NSDictionary * dictionary, NSError * error) {
+        NSArray *data = dictionary[@"items"];
+        for (NSDictionary *playlist in data) {
+            NSString *href = [playlist[@"tracks"][@"href"] substringFromIndex:23];
+            [[SpotifyManager shared] doGetRequest:href accessToken:self.accessToken completion:^(NSDictionary * trackList, NSError * error) {
+                if (trackList) {
+                    NSArray *trackArray = trackList[@"items"];
+                    [self.tracksData addObjectsFromArray:trackArray];
+                }
+            }];
+        }
+    }];
+}
+
 - (IBAction)didTapLogin:(id)sender {
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
@@ -72,6 +95,7 @@
         }
     }];
 }
+
 - (IBAction)didTapSignup:(id)sender {
     // initialize a user object
       PFUser *newUser = [PFUser user];
@@ -91,6 +115,7 @@
           }
       }];
 }
+
 - (IBAction)didTapSkip:(id)sender {
     [self performSegueWithIdentifier:@"loginSegue" sender:self.accessToken];
 }
@@ -123,6 +148,8 @@
         searchVC.accessToken = self.accessToken;
         profileVC.accessToken = self.accessToken;
         affinitiesVC.accessToken = self.accessToken;
+        affinitiesVC.tracksData = self.tracksData;
+        
         
         tbc.selectedIndex = 1;
        }

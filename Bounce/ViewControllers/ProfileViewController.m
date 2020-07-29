@@ -6,54 +6,65 @@
 //  Copyright © 2020 Carmen Gutierrez. All rights reserved.
 //
 
+//standard
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
 #import "SceneDelegate.h"
+#import "UIImageView+AFNetworking.h"
+#import "SpotifyManager.h"
+//view controllers
 #import "ViewController.h"
 #import "TrackDetailsViewController.h"
 #import "ArtistDetailsViewController.h"
 #import "LoginViewController.h"
+//models and views
 #import "TrackCell.h"
 #import "ArtistCell.h"
 #import "Track.h"
 #import "Artist.h"
-#import "UIImageView+AFNetworking.h"
-#import "SpotifyManager.h"
 
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+//storyboard outlets
 @property (weak, nonatomic) IBOutlet UIImageView *profileView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *editingView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property BOOL isEditing;
-@property (strong, nonatomic) NSArray *topTracksArray;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *timeRangeControl;
+//editing booleans
+@property BOOL isEditing;
+//data
+@property (strong, nonatomic) NSArray *topTracksArray;
 @property (strong, nonatomic) NSArray *topArtistsArray;
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
+    //set up delegates/datasources
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    //get list of user's top tracks and artists
     [self fetchTopTracks];
     [self fetchTopArtists];
+    //if user is logged in, display their username. if not, display Guest.
     PFUser *user = [PFUser currentUser];
     if(user) {
         self.userLabel.text = user.username;
     } else {
         self.userLabel.text = @"Guest";
     }
+    //setup editing mode
     self.editingView.hidden = YES;
     [self.profileView setUserInteractionEnabled:NO];
     UITapGestureRecognizer *profileViewGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileViewClicked)];
     [self.profileView addGestureRecognizer:profileViewGesture];
-    [self.timeRangeControl addTarget:self action:@selector(didChangeTimeRange) forControlEvents:UIControlEventValueChanged];
-    // Do any additional setup after loading the view.
+    //make profile view a circle
     self.profileView.layer.cornerRadius = self.profileView.frame.size.width/2;
     self.profileView.clipsToBounds = YES;
+    //redo search if time range has changed.
+    [self.timeRangeControl addTarget:self action:@selector(didChangeTimeRange) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)fetchTopTracks {
@@ -94,7 +105,7 @@
     }
 }
 
-- (void)didChangeTimeRange {
+- (void)didChangeTimeRange { //should redo search if user changed time range
     [self fetchTopArtists];
     [self fetchTopTracks];
 }
@@ -114,11 +125,11 @@
 }
 
 - (IBAction)didTapSettings:(id)sender {
-    if (self.isEditing){
+    if (self.isEditing){ //if user is already editing, then turn off editing mode
         self.profileView.userInteractionEnabled = NO;
         self.isEditing = NO;
         self.editingView.hidden = YES;
-    } else {
+    } else { // if user is not already editing, then turn on editing mode
         self.profileView.userInteractionEnabled = YES;
         self.isEditing = YES;
         self.editingView.hidden = NO;
@@ -138,7 +149,6 @@
     }
 
     [self presentViewController:imagePickerVC animated:YES completion:nil];
-    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -146,7 +156,7 @@
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
 
-    // Do something with the images (based on your use case)
+    // Resize image for upload to Parse server. Set profileView's image to chosen image.
     CGSize size = CGSizeMake(originalImage.size.width/3, originalImage.size.height/3);
     [self resizeImage:originalImage withSize:size];
     self.profileView.image = originalImage;
@@ -171,6 +181,7 @@
         TrackCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TrackCell"];
         Track *track = [[Track alloc] initWithDictionary:self.topTracksArray[indexPath.row]];
         cell.trackTitleLabel.text = track.name;
+        // For each artist of the track, append separated by commas.
         NSString *artistsList = @"";
         for (NSDictionary *artist in track.artists) {
             if(artistsList.length == 0) {
@@ -180,6 +191,7 @@
             }
         }
         cell.trackArtistLabel.text = artistsList;
+        //set image with url and make circular image.
         NSURL *url = [NSURL URLWithString:track.album.image.url];
         [cell.albumArtView setImageWithURL:url];
         cell.albumArtView.layer.cornerRadius = 5;
@@ -189,6 +201,7 @@
         ArtistCell *cell = [tableView dequeueReusableCellWithIdentifier: @"ArtistCell"];
         Artist *artist =[[Artist alloc] initWithDictionary:self.topArtistsArray[indexPath.row]];
         cell.artistNameLabel.text = artist.name;
+        //set image with url and make circular image.
         NSURL *url = [NSURL URLWithString:artist.image.url];
         [cell.artistImageView setImageWithURL:url];
         cell.artistImageView.layer.cornerRadius =  cell.artistImageView.frame.size.width/2;

@@ -45,7 +45,7 @@ static NSString * const SpotifyRedirectURLString = @"bounce-spotify://callback";
     //Parse config
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"bounce-parse";
-        configuration.server = @"http://bounce_parse.herokuapp.com/parse";
+        configuration.server = @"http://bounce-parse.herokuapp.com/parse";
     }];
     [Parse initializeWithConfiguration:config];
     

@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AffinitiesViewController : UIViewController
+@property (nonatomic, strong) NSMutableArray *tracksData;
+@property (nonatomic, strong) NSMutableArray<NSString *> *genresData;
+@property (nonatomic, strong) NSMutableArray<NSString *> *artistsData;
 @property (nonatomic, strong) NSString *accessToken;
 @end
 
