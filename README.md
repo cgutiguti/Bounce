@@ -58,7 +58,8 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 - [x] changing artist/track filter should execute another search
 - [ ] changing profile picture should upload it to Parse server
 - [x] after logging out once, the login view controller is never called. (SOLUTION: log out button now redirects to login view controller.)
-- [ ] logging in on the login view controller does not work. (connection to daemon was invalidated)
+- [x] logging in on the login view controller does not work. (connection to daemon was invalidated)
+- [ ] track details view controller keeps on scrolling infinitely.
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
