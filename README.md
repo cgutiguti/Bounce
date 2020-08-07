@@ -220,14 +220,14 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 #### Playlist
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
-   | id	   | string	   | The Spotify ID for the playlist. |
-   | images	   | an array of image objects   | 	Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See Working with Playlists.|
-Note: If returned, the source URL for the image ( url ) is temporary and will expire in less than a day.
    | name	   | string	   | The name of the playlist.|
    | owner	   | a user object	   | The user who owns the playlist|
    | public	   | Boolean or null	   | The playlist’s public/private status: true the playlist is public, false the playlist is private, null the playlist status is not relevant. For more about public/private status, see Working with Playlists.|
    | tracks	   | array of playlist track objects inside a paging object	| Information about the tracks of the playlist.|
    | type	   | string   | 	The object type: “playlist”|
+   | id	   | string	   | The Spotify ID for the playlist. |
+   | images	   | an array of image objects   | 	Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. See Working with Playlists.|
+Note: If returned, the source URL for the image ( url ) is temporary and will expire in less than a day.
    
 #### Audio Features
 
