@@ -310,6 +310,7 @@ Base URL: https://api.spotify.com/v1
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
+ | METHOD	 |
  | ---------- | 
  | atl trap	 |
  | modern funk	 |
@@ -327,6 +328,8 @@ Base URL: https://api.spotify.com/v1
  | tropical	 | 
  | shimmer life	 | 
  
+ 
+ | METHOD	 | METHOD	 |
  | ------------- | -------- |
  | atl trap	 | 2 |
  | modern funk	 | 1 |
