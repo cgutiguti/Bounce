@@ -48,7 +48,7 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
  - [x] implement logout button
 ### Week 4
  - [x] animations
- - [ ] image assets and design
+ - [x] image assets and design
  - [x] Auto Layout
 ### Bugs that need to be fixed
 - [x] artist details screen top tracks table view and related artists table view didn't stay loaded for long (SOLUTION: make arrays have strong attribute)
@@ -56,10 +56,10 @@ Have you ever wondered how Spotify recommends music for you so well? This Music 
 - [x] remove decimal places of audio features and multiply by 100
 - [x] time signature audio feature doesn't show up correctly
 - [x] changing artist/track filter should execute another search
-- [ ] changing profile picture should upload it to Parse server
+- [x] changing profile picture should upload it to Parse server
 - [x] after logging out once, the login view controller is never called. (SOLUTION: log out button now redirects to login view controller.)
 - [x] logging in on the login view controller does not work. (connection to daemon was invalidated)
-- [ ] track details view controller keeps on scrolling infinitely.
+- [x] track details view controller keeps on scrolling infinitely.
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
@@ -311,31 +311,3 @@ Base URL: https://api.spotify.com/v1
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
 
-
- | METHOD	 | METHOD	 |
- | ------- | --------- |
- | atl trap	 | atl trap	 |
- | modern funk	 | atl trap	 |
- | shimmer life	 | atl trap	 |
- | tropical	 | atl trap	 |
- | wave	 | atl trap	 |
- | wave	 | atl trap	 |
- | tropical	 | atl trap	 |
- | shimmer life	 | atl trap	 |
- | tropical	 | atl trap	 |
- | atl trap	 | atl trap	 |
- | tropical	 | atl trap	 |
- | wave	 | atl trap	 |
- | wave	 | atl trap	 |
- | tropical	 | atl trap	 |
- | shimmer life	 | atl trap	 |
- 
- 
- | METHOD	 | METHOD	 |
- | ------------- | -------- |
- | atl trap	 | 2 |
- | modern funk	 | 1 |
- | shimmer life	| 2 |
- | tropical	 | 5 |
- | wave	 | 4 |
- 
